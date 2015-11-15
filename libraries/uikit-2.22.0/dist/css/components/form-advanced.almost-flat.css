@@ -1,0 +1,78 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Form advanced
+   Note: Only works in Webkit at the moment
+ ========================================================================== */
+/*
+ * 1. Style
+ * 2. Makes box more robust so it clips the child element
+ * 3. Vertical alignment
+ * 4. Remove default style
+ * 5. Fix black background on iOS
+ */
+.i-form input[type="radio"],
+.i-form input[type="checkbox"] {
+  /* 1 */
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+  border: 1px solid #aaaaaa;
+  /* 2 */
+  overflow: hidden;
+  /* 3 */
+  margin-top: -4px;
+  vertical-align: middle;
+  /* 4 */
+  -webkit-appearance: none;
+  outline: 0;
+  /* 5 */
+  background: transparent;
+}
+/* Radio */
+.i-form input[type="radio"] {
+  border-radius: 50%;
+}
+/*
+ * Checked
+ */
+.i-form input[type=radio]:before,
+.i-form input[type=checkbox]:before {
+  display: block;
+}
+/* Radio */
+.i-form input[type=radio]:checked:before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  margin: 2px auto 0;
+  border-radius: 50%;
+  background: #00a8e6;
+}
+/* Checkbox */
+.i-form input[type=checkbox]:checked:before,
+.i-form input[type=checkbox]:indeterminate:before {
+  content: "\f00c";
+  font-family: FontAwesome;
+  font-size: 12px;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  line-height: 12px;
+  color: #00a8e6;
+}
+.i-form input[type=checkbox]:indeterminate:before {
+  content: "\f068";
+}
+/*
+ * Disabled
+ */
+.i-form input[type=radio]:disabled,
+.i-form input[type=checkbox]:disabled {
+  border-color: #dddddd;
+}
+.i-form input[type=radio]:disabled:checked:before {
+  background-color: #aaaaaa;
+}
+.i-form input[type=checkbox]:disabled:checked:before,
+.i-form input[type=checkbox]:disabled:indeterminate:before {
+  color: #aaaaaa;
+}

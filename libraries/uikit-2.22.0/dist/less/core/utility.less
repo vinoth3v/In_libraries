@@ -1,0 +1,606 @@
+// Name:            Utility
+// Description:     Collection of useful utility classes to style your content
+//
+// Component:       `i-container-*`
+//                  `i-clearfix`
+//                  `i-nbfc-*`
+//                  `i-float-*`
+//                  `i-align-*`
+//                  `i-vertical-align-*`
+//                  `i-height-*`
+//                  `i-responsive-*`
+//                  `i-margin-*`
+//                  `i-padding-*`
+//                  `i-border-*`
+//                  `i-heading-*`
+//                  `i-link-*`
+//                  `i-scrollable-*`
+//                  `i-overflow-*`
+//                  `i-position-*`
+//                  `i-display-*`
+//                  `i-visible-*`
+//                  `i-hidden-*`
+//                  `i-invisible`
+//
+// Used by:         Overlay
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@utility-container-max-width:                   980px;
+@utility-container-padding-horizontal:          25px;
+
+@utility-container-large-max-width:             1200px;
+@utility-container-large-padding-horizontal:    35px;
+
+@utility-align-horizontal:                      15px;
+@utility-align-vertical:                        15px;
+
+@utility-height-viewport-min-height:            600px;
+
+@utility-margin:                                15px;
+@utility-margin-small:                          5px;
+@utility-margin-large:                          50px;
+
+@utility-border-rounded:                        5px;
+
+@utility-heading-large-small-font-size:         36px;
+@utility-heading-large-small-line-height:       42px;
+@utility-heading-large-font-size:               52px;
+@utility-heading-large-line-height:             64px;
+
+@utility-link-muted-color:                      #444;
+@utility-link-muted-hover-color:                #444;
+
+@utility-scrollable-text-height:                300px;
+
+@utility-scrollable-box-height:                 170px;
+@utility-scrollable-box-padding:                10px;
+@utility-scrollable-box-border:                 #ddd;
+@utility-scrollable-box-border-width:           1px;
+
+
+/* ========================================================================
+   Component: Utility
+ ========================================================================== */
+
+/* Container
+ ========================================================================== */
+
+.i-container {
+    box-sizing: border-box;
+    max-width: @utility-container-max-width;
+    padding: 0 @utility-container-padding-horizontal;
+    .hook-container;
+}
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge) {
+
+    .i-container {
+        max-width: @utility-container-large-max-width;
+        padding: 0 @utility-container-large-padding-horizontal;
+    }
+
+}
+
+/*
+ * Micro clearfix
+ */
+
+.i-container:before,
+.i-container:after {
+    content: "";
+    display: table;
+}
+
+.i-container:after { clear: both; }
+
+/*
+ * Center container
+ */
+
+.i-container-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Clearing
+ ========================================================================== */
+
+/*
+ * Micro clearfix
+* `table-cell` is used with `:before` because `table` creates a 1px gap when it becomes a flex item, only in Webkit
+ * `table` is used again with `:after` because `clear` only works with block elements.
+ * Note: `display: block` with `overflow: hidden` is currently not working in the latest Safari
+ */
+
+.i-clearfix:before {
+    content: "";
+    display: table-cell;
+}
+
+.i-clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/*
+ *  Create a new block formatting context
+ */
+
+.i-nbfc { overflow: hidden; }
+
+.i-nbfc-alt {
+    display: table-cell;
+    width: 10000px;
+}
+
+
+/* Alignment of block elements
+ ========================================================================== */
+
+/*
+ * Float blocks
+ * 1. Prevent content overflow on small devices
+ */
+
+.i-float-left { float: left; }
+.i-float-right { float: right; }
+
+/* 1 */
+[class*='i-float-'] { max-width: 100%; }
+
+
+/* Alignment of images and objects
+ ========================================================================== */
+
+/*
+ * Alignment
+ */
+
+[class*='i-align-'] {
+    display: block;
+    margin-bottom: @utility-align-vertical;
+}
+
+.i-align-left {
+    margin-right: @utility-align-horizontal;
+    float: left;
+}
+
+.i-align-right {
+    margin-left: @utility-align-horizontal;
+    float: right;
+}
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .i-align-medium-left {
+        margin-right: @utility-align-horizontal;
+        margin-bottom: @utility-align-vertical;
+        float: left;
+    }
+
+    .i-align-medium-right {
+        margin-left: @utility-align-horizontal;
+        margin-bottom: @utility-align-vertical;
+        float: right;
+    }
+
+}
+
+.i-align-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Vertical alignment
+ ========================================================================== */
+
+/*
+ * Remove whitespace between child elements when using `inline-block`
+ */
+
+.i-vertical-align { font-size: 0.001px; }
+
+/*
+ *  The `i-vertical-align` container needs a specific height
+ */
+
+.i-vertical-align:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+/*
+ * Sub-object which can have any height
+ * 1. Reset whitespace hack
+ */
+
+.i-vertical-align-middle,
+.i-vertical-align-bottom {
+    display: inline-block;
+    max-width: 100%;
+    /* 1 */
+    font-size: 1rem;
+}
+
+.i-vertical-align-middle { vertical-align: middle; }
+.i-vertical-align-bottom { vertical-align: bottom; }
+
+
+/* Height
+ ========================================================================== */
+
+/*
+ * More robust if padding and border are used
+ */
+
+[class*='i-height'] { box-sizing: border-box; }
+
+/*
+ * Useful to extend the `html` and `body` element to the full height of the page.
+ */
+
+.i-height-1-1 { height: 100%; }
+
+/*
+ * Useful to create image teasers
+ */
+
+.i-height-viewport {
+    height: 100vh;
+    min-height: @utility-height-viewport-min-height;
+}
+
+
+/* Responsive objects
+ * Note: Images are already responsive by default, see Base component
+ ========================================================================== */
+
+/*
+ * 1. Corrects `max-width` and `max-height` behavior if padding and border are used
+ */
+
+.i-responsive-width,
+.i-responsive-height { box-sizing: border-box; }
+
+/*
+ * Responsiveness: Sets a maximum width relative to the parent and auto scales the height
+ * `important` needed to override `i-img-preserve img`
+ */
+
+.i-responsive-width {
+    max-width: 100% !important;
+    height: auto;
+}
+
+/*
+ * Responsiveness: Sets a maximum height relative to the parent and auto scales the width
+ * Only works if the parent element has a fixed height.
+ */
+
+.i-responsive-height {
+    max-height: 100%;
+    width: auto;
+}
+
+
+/* Margin
+ ========================================================================== */
+
+/*
+ * Create a block with the same margin of a paragraph
+ * Add margin if adjacent element
+ */
+
+.i-margin { margin-bottom: @utility-margin; }
+* + .i-margin { margin-top: @utility-margin; }
+
+.i-margin-top { margin-top: @utility-margin !important; }
+.i-margin-bottom { margin-bottom: @utility-margin !important; }
+.i-margin-left { margin-left: @utility-margin !important; }
+.i-margin-right { margin-right: @utility-margin !important; }
+
+/*
+ * Larger margins
+ */
+
+.i-margin-large { margin-bottom: @utility-margin-large; }
+* + .i-margin-large { margin-top: @utility-margin-large; }
+
+.i-margin-large-top { margin-top: @utility-margin-large !important; }
+.i-margin-large-bottom { margin-bottom: @utility-margin-large !important; }
+.i-margin-large-left { margin-left: @utility-margin-large !important; }
+.i-margin-large-right { margin-right: @utility-margin-large !important; }
+
+/*
+ * Smaller margins
+ */
+
+.i-margin-small { margin-bottom: @utility-margin-small; }
+* + .i-margin-small { margin-top: @utility-margin-small; }
+
+.i-margin-small-top { margin-top: @utility-margin-small !important; }
+.i-margin-small-bottom { margin-bottom: @utility-margin-small !important; }
+.i-margin-small-left { margin-left: @utility-margin-small !important; }
+.i-margin-small-right { margin-right: @utility-margin-small !important; }
+
+/*
+ * Remove margins
+ */
+
+.i-margin-remove { margin: 0 !important; }
+.i-margin-top-remove { margin-top: 0 !important; }
+.i-margin-bottom-remove { margin-bottom: 0 !important; }
+
+
+/* Padding
+ ========================================================================== */
+
+.i-padding-remove { padding: 0 !important; }
+.i-padding-top-remove { padding-top: 0 !important; }
+.i-padding-bottom-remove { padding-bottom: 0 !important; }
+
+.i-padding-vertical-remove {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Border
+ ========================================================================== */
+
+.i-border-circle { border-radius: 50%; }
+.i-border-rounded { border-radius: @utility-border-rounded; }
+
+
+/* Headings
+ ========================================================================== */
+
+.i-heading-large {
+    font-size: @utility-heading-large-small-font-size;
+    line-height: @utility-heading-large-small-line-height;
+}
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .i-heading-large {
+        font-size: @utility-heading-large-font-size;
+        line-height: @utility-heading-large-line-height;
+    }
+
+}
+
+
+/* Link
+ ========================================================================== */
+
+/*
+ * Let links appear in default text color
+ */
+
+.i-link-muted,
+.i-link-muted a { color: @utility-link-muted-color; }
+
+.i-link-muted:hover,
+.i-link-muted a:hover { color: @utility-link-muted-hover-color; }
+
+/*
+ * Reset link style
+ */
+
+.i-link-reset,
+.i-link-reset a,
+.i-link-reset:hover,
+.i-link-reset a:hover,
+.i-link-reset:focus,
+.i-link-reset a:focus {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* Scrollable
+ ========================================================================== */
+
+/*
+ * Enable scrolling for preformatted text
+ */
+
+.i-scrollable-text {
+    height: @utility-scrollable-text-height;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    resize: both;
+}
+
+/*
+ * Box with scrolling enabled
+ */
+
+.i-scrollable-box {
+    box-sizing: border-box;
+    height: @utility-scrollable-box-height;
+    padding: @utility-scrollable-box-padding;
+    border: @utility-scrollable-box-border-width solid @utility-scrollable-box-border;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    resize: both;
+    .hook-scrollable-box;
+}
+
+.i-scrollable-box > :last-child { margin-bottom: 0; }
+
+
+/* Overflow
+ ========================================================================== */
+
+.i-overflow-hidden { overflow: hidden; }
+
+/*
+ * Enable scrollbars if content is clipped
+ */
+
+.i-overflow-container {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.i-overflow-container > :last-child { margin-bottom: 0; }
+
+
+/* Position
+ ========================================================================== */
+
+.i-position-absolute,
+[class*='i-position-top'],
+[class*='i-position-bottom'] { position: absolute !important; }
+
+/* Don't use `width: 100%` because it is wrong if the parent has padding. */
+.i-position-top {
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.i-position-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.i-position-top-left {
+    top: 0;
+    left: 0;
+}
+
+.i-position-top-right {
+    top: 0;
+    right: 0;
+}
+
+.i-position-bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+.i-position-bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+/*
+ * Cover
+ */
+
+.i-position-cover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/*
+ * Relative
+ */
+
+.i-position-relative { position: relative !important; }
+
+/*
+ * Z-index
+ */
+
+.i-position-z-index { z-index: 1; }
+
+
+/* Display
+ ========================================================================== */
+
+/*
+ * Display
+ */
+
+.i-display-block { display: block !important; }
+.i-display-inline { display: inline !important; }
+.i-display-inline-block { display: inline-block !important; }
+
+/*
+ * Visibility
+ * Avoids setting display to `block` so it works also with `inline-block` and `table`
+ */
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large) {
+
+    .i-visible-small { display: none !important; }
+    .i-visible-medium { display: none !important; }
+    .i-hidden-large { display: none !important; }
+
+}
+
+/* Tablets portrait */
+@media (min-width: @breakpoint-medium) and (max-width: @breakpoint-medium-max) {
+
+    .i-visible-small { display: none !important; }
+    .i-visible-large { display: none !important ; }
+    .i-hidden-medium { display: none !important; }
+
+}
+
+/* Phone landscape and smaller*/
+@media (max-width: @breakpoint-small-max) {
+
+    .i-visible-medium { display: none !important; }
+    .i-visible-large { display: none !important; }
+    .i-hidden-small { display: none !important; }
+
+}
+
+/* Remove from the flow and screen readers on any device */
+.i-hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* It's hidden, but still affects layout */
+.i-invisible { visibility: hidden !important; }
+
+/* Show on hover */
+.i-visible-hover:hover .i-hidden,
+.i-visible-hover:hover .i-invisible {
+    display: block !important;
+    visibility: visible !important;
+}
+
+.i-visible-hover-inline:hover .i-hidden,
+.i-visible-hover-inline:hover .i-invisible {
+    display: inline-block !important;
+    visibility: visible !important;
+}
+
+/* Hide on touch */
+.i-touch .i-hidden-touch,
+.i-notouch .i-hidden-notouch { display: none !important; }
+
+
+// Hooks
+// ========================================================================
+
+.hook-utility-misc;
+
+.hook-container() {}
+.hook-scrollable-box() {}
+.hook-utility-misc() {}

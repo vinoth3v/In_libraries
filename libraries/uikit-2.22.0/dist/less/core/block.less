@@ -1,0 +1,153 @@
+// Name:            Block
+// Description:     Defines styles to create horizontal layout blocks
+//
+// Component:       `i-block`
+//
+// Modifiers:       `i-list-line`
+//                  `i-list-striped`
+//                  `i-list-space`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@block-padding-vertical:                        20px;
+@block-padding-vertical-large:                  50px;
+
+@block-large-padding-vertical:                  @block-padding-vertical;
+@block-large-padding-vertical-medium:           @block-padding-vertical-large;
+@block-large-padding-vertical-large:            100px;
+
+@block-default-background:                      #fff;
+@block-muted-background:                        #f9f9f9;
+@block-primary-background:                      #00a8e6;
+@block-secondary-background:                    #222;
+
+
+/* ========================================================================
+   Component: Block
+ ========================================================================== */
+
+.i-block {
+    position: relative;
+    box-sizing: border-box;
+    padding-top: @block-padding-vertical;
+    padding-bottom: @block-padding-vertical;
+    .hook-block;
+}
+
+/* Phone landscape and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .i-block {
+        padding-top: @block-padding-vertical-large;
+        padding-bottom: @block-padding-vertical-large;
+    }
+
+}
+
+/*
+ * Micro clearfix to make blocks more robust
+ */
+
+.i-block:before,
+.i-block:after {
+    content: "";
+    display: table;
+}
+
+.i-block:after { clear: both; }
+
+/*
+ * Remove margin from the last-child
+ */
+
+.i-block > :last-child { margin-bottom: 0; }
+
+
+/* Padding Modifier
+ ========================================================================== */
+
+/*
+ * Large padding
+ */
+
+.i-block-large {
+    padding-top: @block-large-padding-vertical;
+    padding-bottom: @block-large-padding-vertical;
+}
+
+/* Tablets and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .i-block-large {
+        padding-top: @block-large-padding-vertical-medium;
+        padding-bottom: @block-large-padding-vertical-medium;
+    }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large) {
+
+    .i-block-large {
+        padding-top: @block-large-padding-vertical-large;
+        padding-bottom: @block-large-padding-vertical-large;
+    }
+
+}
+
+
+/* Color Modifier
+ ========================================================================== */
+
+/*
+ * Default
+ */
+
+.i-block-default {
+    background: @block-default-background;
+    .hook-block-default;
+}
+
+/*
+ * Muted
+ */
+
+.i-block-muted {
+    background: @block-muted-background;
+    .hook-block-muted;
+}
+
+/*
+ * Primary
+ */
+
+.i-block-primary {
+    background: @block-primary-background;
+    .hook-block-primary;
+}
+
+/*
+ * Secondary
+ */
+
+.i-block-secondary {
+    background: @block-secondary-background;
+    .hook-block-secondary;
+}
+
+
+// Hooks
+// ========================================================================
+
+.hook-block-misc;
+
+.hook-block() {}
+.hook-block-default() {}
+.hook-block-muted() {}
+.hook-block-secondary() {}
+.hook-block-primary() {}
+.hook-block-misc() {}

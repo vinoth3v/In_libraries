@@ -1,0 +1,368 @@
+// Name:            Tab
+// Description:     Defines styles for a tabbed navigation
+//
+// Component:       `i-tab`
+//
+// Modifiers:       `i-tab-flip`
+//                  `i-tab-center`
+//                  `i-tab-grid`
+//                  `i-tab-bottom`
+//                  `i-tab-left`
+//                  `i-tab-right`
+//                  `i-tab-responsive`
+//
+// States:          `i-active`
+//                  `i-disabled`
+//
+// Markup:
+//
+// <!-- i-tab -->
+// <ul class="i-tab" data-i-tab>
+//     <li class="i-active"><a href=""></a></li>
+//     <li><a href=""></a></li>
+// </ul>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$tab-border:                                     #ddd !default;
+$tab-border-width:                               1px !default;
+$tab-padding-horizontal:                         12px !default;
+$tab-padding-vertical:                           8px !default;
+$tab-padding-top:                                $tab-padding-vertical !default;
+$tab-padding-bottom:                             $tab-padding-vertical !default;
+$tab-margin-horizontal:                          5px !default;
+$tab-margin-vertical:                            5px !default;
+$tab-color:                                      #07D !default;
+$tab-hover-border:                               #f5f5f5 !default;
+$tab-hover-background:                           #f5f5f5 !default;
+$tab-hover-color:                                #059 !default;
+$tab-active-border:                              #ddd !default;
+$tab-active-background:                          #fff !default;
+$tab-active-color:                               #444 !default;
+$tab-disabled-color:                             #999 !default;
+
+
+/* ========================================================================
+   Component: Tab
+ ========================================================================== */
+
+.i-tab {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: $tab-border-width solid $tab-border;
+}
+
+/*
+ * Micro clearfix on the deepest container
+ */
+
+.i-tab:before,
+.i-tab:after {
+    content: "";
+    display: table;
+}
+
+.i-tab:after { clear: both; }
+
+/*
+ * Items
+ * 1. Create position context for dropdowns
+ */
+
+.i-tab > li {
+    margin-bottom: -$tab-border-width;
+    float: left;
+    /* 1 */
+    position: relative;
+}
+
+.i-tab > li > a {
+    display: block;
+    padding: $tab-padding-top $tab-padding-horizontal $tab-padding-bottom $tab-padding-horizontal;
+    border: $tab-border-width solid transparent;
+    border-bottom-width: 0;
+    color: $tab-color;
+    text-decoration: none;
+    @include hook-tab();
+}
+
+.i-tab > li:nth-child(n+2) > a { margin-left: $tab-margin-horizontal; }
+
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Also apply if dropdown is opened
+ * 3. Remove default focus style
+ */
+
+.i-tab > li > a:hover,
+.i-tab > li > a:focus, // 1
+.i-tab > li.i-open > a { // 2
+    border-color: $tab-hover-border;
+    background: $tab-hover-background;
+    color: $tab-hover-color;
+    /* 2 */
+    outline: none;
+    @include hook-tab-hover();
+}
+
+.i-tab > li:not(.i-active) > a:hover,
+.i-tab > li:not(.i-active) > a:focus,
+.i-tab > li.i-open:not(.i-active) > a {
+    margin-bottom: $tab-border-width;
+    padding-bottom: $tab-padding-bottom - $tab-border-width;
+}
+
+/* Active */
+.i-tab > li.i-active > a {
+    border-color: $tab-active-border;
+    border-bottom-color: transparent;
+    background: $tab-active-background;
+    color: $tab-active-color;
+    @include hook-tab-active();
+}
+
+/* Disabled */
+.i-tab > li.i-disabled > a {
+    color: $tab-disabled-color;
+    cursor: text;
+    @include hook-tab-disabled();
+}
+
+.i-tab > li.i-disabled > a:hover,
+.i-tab > li.i-disabled > a:focus,
+.i-tab > li.i-disabled.i-active > a {
+    background: none;
+    border-color: transparent;
+}
+
+
+/* Modifier: 'tab-flip'
+ ========================================================================== */
+
+.i-tab-flip > li { float: right; }
+
+.i-tab-flip > li:nth-child(n+2) > a {
+    margin-left: 0;
+    margin-right: $tab-margin-horizontal;
+}
+
+
+/* Modifier: 'tab-responsive'
+ ========================================================================== */
+
+.i-tab > li.i-tab-responsive > a {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/*
+ * Icon
+ */
+
+.i-tab-responsive > a:before {
+    content: "\f0c9\00a0";
+    font-family: FontAwesome;
+}
+
+
+/* Modifier: 'tab-center'
+ ========================================================================== */
+
+.i-tab-center { border-bottom: $tab-border-width solid $tab-border; }
+
+.i-tab-center-bottom {
+    border-bottom: none;
+    border-top: $tab-border-width solid $tab-border;
+}
+
+.i-tab-center:before,
+.i-tab-center:after {
+    content: "";
+    display: table;
+}
+
+.i-tab-center:after { clear: both; }
+
+
+/*
+ * 1. Using `right` to prevent vertical scrollbar caused by centering if to many tabs
+ */
+
+.i-tab-center .i-tab {
+    position: relative;
+    right: 50%;
+    border: none;
+    float: right;
+}
+
+.i-tab-center .i-tab > li {
+    position: relative;
+    right: -50%;
+}
+
+.i-tab-center .i-tab > li > a { text-align: center; }
+
+
+/* Modifier: 'tab-bottom'
+ ========================================================================== */
+
+.i-tab-bottom {
+    border-top: $tab-border-width solid $tab-border;
+    border-bottom: none;
+}
+
+.i-tab-bottom > li {
+    margin-top: -$tab-border-width;
+    margin-bottom: 0;
+}
+
+.i-tab-bottom > li > a {
+    padding-top: $tab-padding-bottom;
+    padding-bottom: $tab-padding-top;
+    border-bottom-width: $tab-border-width;
+    border-top-width: 0;
+}
+
+.i-tab-bottom > li:not(.i-active) > a:hover,
+.i-tab-bottom > li:not(.i-active) > a:focus,
+.i-tab-bottom > li.i-open:not(.i-active) > a {
+    margin-bottom: 0;
+    margin-top: $tab-border-width;
+    padding-bottom: $tab-padding-top;
+    padding-top: $tab-padding-bottom - $tab-border-width;
+}
+
+.i-tab-bottom > li.i-active > a {
+    border-top-color: transparent;
+    border-bottom-color: $tab-active-border;
+}
+
+
+/* Modifier: 'tab-grid'
+ ========================================================================== */
+
+/*
+ * 1. Create position context to prevent hidden border because of negative `z-index`
+ */
+
+.i-tab-grid {
+    margin-left: -$tab-margin-horizontal;
+    border-bottom: none;
+    /* 1 */
+    position: relative;
+    z-index: 0;
+}
+
+.i-tab-grid:before {
+    display: block;
+    position: absolute;
+    left: $tab-margin-horizontal;
+    right: 0;
+    bottom: -$tab-border-width;
+    border-top: $tab-border-width solid $tab-border;
+    /* 1 */
+    z-index: -1;
+}
+
+.i-tab-grid > li:first-child > a { margin-left: $tab-margin-horizontal; }
+
+.i-tab-grid > li > a { text-align: center; }
+
+/*
+ * If `i-tab-bottom`
+ */
+
+.i-tab-grid.i-tab-bottom { border-top: none; }
+.i-tab-grid.i-tab-bottom:before {
+    top: -$tab-border-width;
+    bottom: auto;
+}
+
+
+/* Modifier: 'tab-left', 'tab-right'
+ ========================================================================== */
+
+/* Tablet and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    .i-tab-left,
+    .i-tab-right { border-bottom: none; }
+
+    .i-tab-left > li,
+    .i-tab-right > li {
+        margin-bottom: 0;
+        float: none;
+    }
+
+    .i-tab-left > li > a,
+    .i-tab-right > li > a {
+        padding-top: $tab-padding-vertical;
+        padding-bottom: $tab-padding-vertical;
+    }
+
+    .i-tab-left > li:nth-child(n+2) > a,
+    .i-tab-right > li:nth-child(n+2) > a {
+        margin-left: 0;
+        margin-top: $tab-margin-vertical;
+    }
+
+    .i-tab-left > li.i-active > a,
+    .i-tab-right > li.i-active > a { border-color: $tab-active-border; }
+
+    /*
+     * Modifier: 'tab-left'
+     */
+
+    .i-tab-left { border-right: $tab-border-width solid $tab-border; }
+    .i-tab-left > li { margin-right: -$tab-border-width; }
+    .i-tab-left > li > a {
+        border-bottom-width: $tab-border-width;
+        border-right-width: 0;
+    }
+    .i-tab-left > li:not(.i-active) > a:hover,
+    .i-tab-left > li:not(.i-active) > a:focus {
+        margin-bottom: 0;
+        margin-right: $tab-border-width;
+        padding-bottom: $tab-padding-vertical;
+        padding-right: $tab-padding-horizontal - $tab-border-width;
+    }
+    .i-tab-left > li.i-active > a { border-right-color: transparent; }
+
+    /*
+     * Modifier: 'tab-right'
+     */
+
+    .i-tab-right { border-left: $tab-border-width solid $tab-border; }
+    .i-tab-right > li { margin-left: -$tab-border-width; }
+    .i-tab-right > li > a {
+        border-bottom-width: $tab-border-width;
+        border-left-width: 0;
+    }
+    .i-tab-right > li:not(.i-active) > a:hover,
+    .i-tab-right > li:not(.i-active) > a:focus {
+        margin-bottom: 0;
+        margin-left: $tab-border-width;
+        padding-bottom: $tab-padding-vertical;
+        padding-left: $tab-padding-horizontal - $tab-border-width;
+    }
+    .i-tab-right > li.i-active > a { border-left-color: transparent; }
+
+}
+
+
+// Hooks
+// ========================================================================
+
+@include hook-tab-misc();
+
+// @mixin hook-tab(){}
+// @mixin hook-tab-hover(){}
+// @mixin hook-tab-active(){}
+// @mixin hook-tab-disabled(){}
+// @mixin hook-tab-misc(){}

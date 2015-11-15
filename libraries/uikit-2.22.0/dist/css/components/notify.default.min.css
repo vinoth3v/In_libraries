@@ -1,0 +1,6 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+.n-notify{position:fixed;top:10px;left:10px;z-index:1040;-moz-box-sizing:border-box;box-sizing:border-box;width:350px}.n-notify-bottom-right,.n-notify-top-right{left:auto;right:10px}.n-notify-bottom-center,.n-notify-top-center{left:50%;margin-left:-175px}.n-notify-bottom-center,.n-notify-bottom-left,.n-notify-bottom-right{top:auto;bottom:10px}@media (max-width:479px){.n-notify{left:10px;right:10px;width:auto;margin:0}}.n-notify-message{position:relative;margin-bottom:10px;padding:15px;background:#444;color:#fff;font-size:16px;line-height:22px;cursor:pointer}.n-notify-message>.n-close{visibility:hidden;float:right}.n-notify-message:hover>.n-close{visibility:visible}.n-notify-message-primary{background:#ebf7fd;color:#2d7091}.n-notify-message-success{background:#f2fae3;color:#659f13}.n-notify-message-warning{background:#fffceb;color:#e28327}.n-notify-message-danger{background:#fff1f0;color:#d85030}

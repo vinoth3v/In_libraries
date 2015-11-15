@@ -1,0 +1,6 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+.n-slider{position:relative;z-index:0;touch-action:pan-y}.n-slider:not(.n-grid){margin:0;padding:0;list-style:none}.n-slider>*{position:absolute;top:0;left:0}.n-slider-container{overflow:hidden}.n-slider:not(.n-drag){-webkit-transition:-webkit-transform 200ms linear;transition:transform 200ms linear}.n-slider.n-drag{cursor:col-resize;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none}.n-slider a,.n-slider img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}.n-slider img{pointer-events:none}.n-slider-fullscreen,.n-slider-fullscreen>li{height:100vh}

@@ -1,0 +1,31 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Sticky
+ ========================================================================== */
+/*
+ * 1. More robust if padding and border are used
+ */
+[data-i-sticky].i-active {
+  z-index: 980;
+  /* 1 */
+  box-sizing: border-box;
+}
+/*
+ * 1. Resolve frame-rate issues on devices with lower frame-rates. Forces hardware acceleration
+ */
+.i-sticky-placeholder > * {
+  /* 1 */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+/*
+ * Faster animations
+ */
+[data-i-sticky][class*='i-animation-'] {
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+}
+[data-i-sticky].i-animation-reverse {
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+}

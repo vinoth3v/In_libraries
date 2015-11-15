@@ -1,0 +1,129 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Dotnav
+ ========================================================================== */
+/*
+ * 1. Gutter
+ * 2. Remove default list style
+ */
+.n-dotnav {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  /* 1 */
+  margin-left: -15px;
+  margin-top: -15px;
+  /* 2 */
+  padding: 0;
+  list-style: none;
+}
+/*
+ * 1. Space is allocated solely based on content dimensions
+ * 2. Horizontal gutter is using `padding` so `n-width-*` classes can be applied
+ */
+.n-dotnav > * {
+  /* 1 */
+  -ms-flex: none;
+  -webkit-flex: none;
+  flex: none;
+  /* 2 */
+  padding-left: 15px;
+  margin-top: 15px;
+}
+/*
+ * DEPRECATED IE9 Support
+ */
+.n-dotnav:before,
+.n-dotnav:after {
+  content: "";
+  display: block;
+  overflow: hidden;
+}
+.n-dotnav:after {
+  clear: both;
+}
+.n-dotnav > * {
+  float: left;
+}
+/* Items
+ ========================================================================== */
+/*
+ * Items
+ * 1. Hide text if present
+ */
+.n-dotnav > * > * {
+  display: block;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(50, 50, 50, 0.1);
+  /* 1 */
+  text-indent: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Remove default focus style
+ */
+.n-dotnav > * > :hover,
+.n-dotnav > * > :focus {
+  background: rgba(50, 50, 50, 0.4);
+  /* 2 */
+  outline: none;
+}
+/* OnClick */
+.n-dotnav > * > :active {
+  background: rgba(50, 50, 50, 0.6);
+}
+/* Active */
+.n-dotnav > .n-active > * {
+  background: rgba(50, 50, 50, 0.4);
+}
+/* Modifier: `n-dotnav-contrast`
+ ========================================================================== */
+.n-dotnav-contrast > * > * {
+  background: rgba(255, 255, 255, 0.4);
+}
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ */
+.n-dotnav-contrast > * > :hover,
+.n-dotnav-contrast > * > :focus {
+  background: rgba(255, 255, 255, 0.7);
+}
+/* OnClick */
+.n-dotnav-contrast > * > :active {
+  background: rgba(255, 255, 255, 0.9);
+}
+/* Active */
+.n-dotnav-contrast > .n-active > * {
+  background: rgba(255, 255, 255, 0.9);
+}
+/* Modifier: 'n-dotnav-vertical'
+ ========================================================================== */
+/*
+ * DEPRECATED
+ */
+.n-dotnav-vertical {
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+/*
+ * DEPRECATED IE9 Support
+ */
+.n-dotnav-vertical > * {
+  float: none;
+}

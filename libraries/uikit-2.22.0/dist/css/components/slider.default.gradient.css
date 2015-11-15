@@ -1,0 +1,89 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Slider
+ ========================================================================== */
+/*
+ * 1. Create position context
+ * 2. Create stacking context to prevent z-index issues with other components
+ * 3. Deactivate browser history navigation in IE11
+ */
+.n-slider {
+  /* 1 */
+  position: relative;
+  /* 2 */
+  z-index: 0;
+  /* 3 */
+  touch-action: pan-y;
+}
+/*
+ * 1. Reset list style without interfering with grid
+ */
+.n-slider:not(.n-grid) {
+  /* 1 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/*
+ * Sub-object item
+ * 1. Position items above each other
+ */
+.n-slider > * {
+  /* 1 */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/*
+ * Clip child elements
+ */
+.n-slider-container {
+  overflow: hidden;
+}
+/*
+ * Dragged
+ */
+.n-slider:not(.n-drag) {
+  -webkit-transition: -webkit-transform 200ms linear;
+  transition: transform 200ms linear;
+}
+/*
+ * 1. Makes text unselectable
+ */
+.n-slider.n-drag {
+  cursor: col-resize;
+  /* 1 */
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/*
+ * 1. Prevents images and links from being dragged (default browser behavior)
+ * 2. Disables the default callout shown when you touch and hold a touch target
+ * Currently only works in Webkit
+ */
+.n-slider a,
+.n-slider img {
+  /* 1 */
+  -webkit-user-drag: none;
+  user-drag: none;
+  /* 2 */
+  -webkit-touch-callout: none;
+}
+/*
+ * 1. Prevents images and links from being dragged in Firefox
+ */
+.n-slider img {
+  pointer-events: none;
+}
+/* Modifier: `n-slider-fullscreen`
+ ========================================================================== */
+.n-slider-fullscreen,
+.n-slider-fullscreen > li {
+  height: 100vh;
+}

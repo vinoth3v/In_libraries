@@ -1,0 +1,644 @@
+// Name:            Grid
+// Description:     Provides a responsive, fluid and nestable grid
+//
+// Component:       `i-grid`
+//                  `i-width-*`
+//                  `i-push-*`
+//                  `i-pull-*`
+//
+// Modifiers:       `i-grid-collapse`
+//                  `i-grid-small`
+//                  `i-grid-medium`
+//                  `i-grid-divider`
+//                  `i-grid-margin`
+//                  `i-grid-match`
+//                  `i-grid-width-*`
+//
+// Uses:            Panel: `i-panel`
+//
+// Used by:         Dropdown
+//
+// Markup:
+//
+// <!-- i-grid -->
+// <div class="i-grid">
+//     <div class="i-width-1-2"></div>
+//     <div class="i-width-1-2"></div>
+// </div>
+//
+// <!-- i-grid-divider -->
+// <div class="i-grid i-grid-divider">
+//     <div class="i-width-1-2"></div>
+//     <div class="i-width-1-2"></div>
+// </div>
+// <hr class="i-grid-divider">
+// <div class="i-grid i-grid-divider">
+//     <div class="i-width-1-2"></div>
+//     <div class="i-width-1-2"></div>
+// </div>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$grid-gutter-horizontal:                         25px !default;
+$grid-gutter-vertical:                           25px !default;
+
+$grid-gutter-large-horizontal:                   35px !default;
+$grid-gutter-large-vertical:                     35px !default;
+
+$grid-gutter-small-horizontal:                   10px !default;
+$grid-gutter-small-vertical:                     10px !default;
+
+$grid-divider-border:                            #ddd !default;
+$grid-divider-border-width:                      1px !default;
+
+
+/* ========================================================================
+   Component: Grid
+ ========================================================================== */
+
+/*
+ * 1. Makes grid more robust so that it can be used with other block elements like lists
+ */
+
+.i-grid {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* 1 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*
+ * DEPRECATED
+ * Micro clearfix
+ * Can't use `table` because it creates a 1px gap when it becomes a flex item, only in Webkit
+ */
+
+.i-grid:before,
+.i-grid:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+}
+
+.i-grid:after { clear: both; }
+
+/*
+ * Grid cell
+ * 1. Space is allocated solely based on content dimensions
+ * 2. Makes grid more robust so that it can be used with other block elements
+ * 3. DEPRECATED Using `float` to support IE9
+ */
+
+.i-grid > * {
+    /* 1 */
+    -ms-flex: none;
+    -webkit-flex: none;
+    flex: none;
+    /* 2 */
+    margin: 0;
+    /* 3 */
+    float: left;
+}
+
+/*
+ * Remove margin from the last-child
+ */
+
+.i-grid > * > :last-child { margin-bottom: 0; }
+
+
+/* Grid gutter
+ ========================================================================== */
+
+/*
+ * Default gutter
+ */
+
+/* Horizontal */
+.i-grid { margin-left: -$grid-gutter-horizontal; }
+.i-grid > * { padding-left: $grid-gutter-horizontal; }
+
+/* Vertical */
+.i-grid + .i-grid,
+.i-grid-margin,
+.i-grid > * > .i-panel + .i-panel { margin-top: $grid-gutter-vertical; }
+
+/* Large screen and bigger */
+@media (min-width: $breakpoint-xlarge) {
+
+    /* Horizontal */
+    .i-grid { margin-left: -$grid-gutter-large-horizontal; }
+    .i-grid > * { padding-left: $grid-gutter-large-horizontal; }
+
+    /* Vertical */
+    .i-grid + .i-grid,
+    .i-grid-margin,
+    .i-grid > * > .i-panel + .i-panel { margin-top: $grid-gutter-large-vertical; }
+
+}
+
+/*
+ * Collapse gutter
+ */
+
+/* Horizontal */
+.i-grid-collapse { margin-left: 0; }
+.i-grid-collapse > * { padding-left: 0; }
+
+/* Vertical */
+.i-grid-collapse + .i-grid-collapse,
+.i-grid-collapse > .i-grid-margin,
+.i-grid-collapse > * > .i-panel + .i-panel { margin-top: 0; }
+
+/*
+ * Small gutter
+ */
+
+/* Horizontal */
+.i-grid-small { margin-left: -$grid-gutter-small-horizontal; }
+.i-grid-small > * { padding-left: $grid-gutter-small-horizontal; }
+
+/* Vertical */
+.i-grid-small + .i-grid-small,
+.i-grid-small > .i-grid-margin,
+.i-grid-small > * > .i-panel + .i-panel { margin-top: $grid-gutter-small-vertical; }
+
+/*
+ * Medium gutter
+ */
+
+/* Horizontal */
+.i-grid-medium { margin-left: -$grid-gutter-horizontal; }
+.i-grid-medium > * { padding-left: $grid-gutter-horizontal; }
+
+/* Vertical */
+.i-grid-medium + .i-grid-medium,
+.i-grid-medium > .i-grid-margin,
+.i-grid-medium > * > .i-panel + .i-panel { margin-top: $grid-gutter-vertical; }
+
+
+/* Modifier: `i-grid-divider`
+ ========================================================================== */
+
+/*
+ * Horizontal divider
+ * Only works with the default gutter. Does not work with gutter collapse, small or large.
+ * Does not work with `i-push-*`, `i-pull-*` and not if the columns float into the next row.
+ */
+
+.i-grid-divider:not(:empty) {
+    margin-left: -$grid-gutter-horizontal;
+    margin-right: -$grid-gutter-horizontal;
+}
+
+.i-grid-divider > * {
+    padding-left: $grid-gutter-horizontal;
+    padding-right: $grid-gutter-horizontal;
+}
+
+.i-grid-divider > [class*='i-width-1-']:not(.i-width-1-1):nth-child(n+2),
+.i-grid-divider > [class*='i-width-2-']:nth-child(n+2),
+.i-grid-divider > [class*='i-width-3-']:nth-child(n+2),
+.i-grid-divider > [class*='i-width-4-']:nth-child(n+2),
+.i-grid-divider > [class*='i-width-5-']:nth-child(n+2),
+.i-grid-divider > [class*='i-width-6-']:nth-child(n+2),
+.i-grid-divider > [class*='i-width-7-']:nth-child(n+2),
+.i-grid-divider > [class*='i-width-8-']:nth-child(n+2),
+.i-grid-divider > [class*='i-width-9-']:nth-child(n+2) { border-left: $grid-divider-border-width solid $grid-divider-border; }
+
+/* Tablet and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    .i-grid-divider > [class*='i-width-medium-']:not(.i-width-medium-1-1):nth-child(n+2) { border-left: $grid-divider-border-width solid $grid-divider-border; }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    .i-grid-divider > [class*='i-width-large-']:not(.i-width-large-1-1):nth-child(n+2) { border-left: $grid-divider-border-width solid $grid-divider-border; }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: $breakpoint-xlarge) {
+
+    /*
+     * Large gutter
+     */
+
+    .i-grid-divider:not(:empty) {
+        margin-left: -$grid-gutter-large-horizontal;
+        margin-right: -$grid-gutter-large-horizontal;
+    }
+
+    .i-grid-divider > * {
+        padding-left: $grid-gutter-large-horizontal;
+        padding-right: $grid-gutter-large-horizontal;
+    }
+
+    .i-grid-divider:empty {
+        margin-top: $grid-gutter-large-vertical;
+        margin-bottom: $grid-gutter-large-vertical;
+    }
+
+}
+
+/*
+ * Vertical divider
+ */
+
+.i-grid-divider:empty {
+    margin-top: $grid-gutter-vertical;
+    margin-bottom: $grid-gutter-vertical;
+    border-top: $grid-divider-border-width solid $grid-divider-border;
+}
+
+/* Match panels in grids
+ ========================================================================== */
+
+/*
+ * 1. Behave like a block element
+ */
+
+.i-grid-match > * {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    /* 1 */
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.i-grid-match > * > * {
+    /* 1 */
+    -ms-flex: none;
+    -webkit-flex: none;
+    flex: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+/* Even grid cell widths
+ ========================================================================== */
+
+[class*='i-grid-width'] > * {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.i-grid-width-1-2 > * { width: 50%; }
+.i-grid-width-1-3 > * { width: 33.333%; }
+.i-grid-width-1-4 > * { width: 25%; }
+.i-grid-width-1-5 > * { width: 20%; }
+.i-grid-width-1-6 > * { width: 16.666%; }
+.i-grid-width-1-10 > * { width: 10%; }
+
+/* Phone landscape and bigger */
+@media (min-width: $breakpoint-small) {
+
+    .i-grid-width-small-1-2 > * { width: 50%; }
+    .i-grid-width-small-1-3 > * { width: 33.333%; }
+    .i-grid-width-small-1-4 > * { width: 25%; }
+    .i-grid-width-small-1-5 > * { width: 20%; }
+    .i-grid-width-small-1-6 > * { width: 16.666%; }
+    .i-grid-width-small-1-10 > * { width: 10%; }
+
+}
+
+/* Tablet and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    .i-grid-width-medium-1-2 > * { width: 50%; }
+    .i-grid-width-medium-1-3 > * { width: 33.333%; }
+    .i-grid-width-medium-1-4 > * { width: 25%; }
+    .i-grid-width-medium-1-5 > * { width: 20%; }
+    .i-grid-width-medium-1-6 > * { width: 16.666%; }
+    .i-grid-width-medium-1-10 > * { width: 10%; }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    .i-grid-width-large-1-2 > * { width: 50%; }
+    .i-grid-width-large-1-3 > * { width: 33.333%; }
+    .i-grid-width-large-1-4 > * { width: 25%; }
+    .i-grid-width-large-1-5 > * { width: 20%; }
+    .i-grid-width-large-1-6 > * { width: 16.666%; }
+    .i-grid-width-large-1-10 > * { width: 10%; }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: $breakpoint-xlarge) {
+
+    .i-grid-width-xlarge-1-2 > * { width: 50%; }
+    .i-grid-width-xlarge-1-3 > * { width: 33.333%; }
+    .i-grid-width-xlarge-1-4 > * { width: 25%; }
+    .i-grid-width-xlarge-1-5 > * { width: 20%; }
+    .i-grid-width-xlarge-1-6 > * { width: 16.666%; }
+    .i-grid-width-xlarge-1-10 > * { width: 10%; }
+
+}
+
+
+/* Sub-objects: `i-width-*`
+ ========================================================================== */
+
+[class*='i-width'] {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/*
+ * Widths
+ */
+
+/* Whole */
+.i-width-1-1 { width: 100%; }
+
+/* Halves */
+.i-width-1-2,
+.i-width-2-4,
+.i-width-3-6,
+.i-width-5-10 { width: 50%; }
+
+/* Thirds */
+.i-width-1-3,
+.i-width-2-6 { width: 33.333%; }
+.i-width-2-3,
+.i-width-4-6 { width: 66.666%; }
+
+/* Quarters */
+.i-width-1-4 { width: 25%; }
+.i-width-3-4 { width: 75%; }
+
+/* Fifths */
+.i-width-1-5,
+.i-width-2-10 { width: 20%; }
+.i-width-2-5,
+.i-width-4-10 { width: 40%; }
+.i-width-3-5,
+.i-width-6-10 { width: 60%; }
+.i-width-4-5,
+.i-width-8-10 { width: 80%; }
+
+/* Sixths */
+.i-width-1-6 { width: 16.666%; }
+.i-width-5-6 { width: 83.333%; }
+
+/* Tenths */
+.i-width-1-10 { width: 10%; }
+.i-width-3-10 { width: 30%; }
+.i-width-7-10 { width: 70%; }
+.i-width-9-10 { width: 90%; }
+
+/* Phone landscape and bigger */
+@media (min-width: $breakpoint-small) {
+
+    /* Whole */
+    .i-width-small-1-1 { width: 100%; }
+
+    /* Halves */
+    .i-width-small-1-2,
+    .i-width-small-2-4,
+    .i-width-small-3-6,
+    .i-width-small-5-10 { width: 50%; }
+
+    /* Thirds */
+    .i-width-small-1-3,
+    .i-width-small-2-6 { width: 33.333%; }
+    .i-width-small-2-3,
+    .i-width-small-4-6 { width: 66.666%; }
+
+    /* Quarters */
+    .i-width-small-1-4 { width: 25%; }
+    .i-width-small-3-4 { width: 75%; }
+
+    /* Fifths */
+    .i-width-small-1-5,
+    .i-width-small-2-10 { width: 20%; }
+    .i-width-small-2-5,
+    .i-width-small-4-10 { width: 40%; }
+    .i-width-small-3-5,
+    .i-width-small-6-10 { width: 60%; }
+    .i-width-small-4-5,
+    .i-width-small-8-10 { width: 80%; }
+
+    /* Sixths */
+    .i-width-small-1-6 { width: 16.666%; }
+    .i-width-small-5-6 { width: 83.333%; }
+
+    /* Tenths */
+    .i-width-small-1-10 { width: 10%; }
+    .i-width-small-3-10 { width: 30%; }
+    .i-width-small-7-10 { width: 70%; }
+    .i-width-small-9-10 { width: 90%; }
+
+}
+
+/* Tablet and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    /* Whole */
+    .i-width-medium-1-1 { width: 100%; }
+
+    /* Halves */
+    .i-width-medium-1-2,
+    .i-width-medium-2-4,
+    .i-width-medium-3-6,
+    .i-width-medium-5-10 { width: 50%; }
+
+    /* Thirds */
+    .i-width-medium-1-3,
+    .i-width-medium-2-6 { width: 33.333%; }
+    .i-width-medium-2-3,
+    .i-width-medium-4-6 { width: 66.666%; }
+
+    /* Quarters */
+    .i-width-medium-1-4 { width: 25%; }
+    .i-width-medium-3-4 { width: 75%; }
+
+    /* Fifths */
+    .i-width-medium-1-5,
+    .i-width-medium-2-10 { width: 20%; }
+    .i-width-medium-2-5,
+    .i-width-medium-4-10 { width: 40%; }
+    .i-width-medium-3-5,
+    .i-width-medium-6-10 { width: 60%; }
+    .i-width-medium-4-5,
+    .i-width-medium-8-10 { width: 80%; }
+
+    /* Sixths */
+    .i-width-medium-1-6 { width: 16.666%; }
+    .i-width-medium-5-6 { width: 83.333%; }
+
+    /* Tenths */
+    .i-width-medium-1-10 { width: 10%; }
+    .i-width-medium-3-10 { width: 30%; }
+    .i-width-medium-7-10 { width: 70%; }
+    .i-width-medium-9-10 { width: 90%; }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    /* Whole */
+    .i-width-large-1-1 { width: 100%; }
+
+    /* Halves */
+    .i-width-large-1-2,
+    .i-width-large-2-4,
+    .i-width-large-3-6,
+    .i-width-large-5-10 { width: 50%; }
+
+    /* Thirds */
+    .i-width-large-1-3,
+    .i-width-large-2-6 { width: 33.333%; }
+    .i-width-large-2-3,
+    .i-width-large-4-6 { width: 66.666%; }
+
+    /* Quarters */
+    .i-width-large-1-4 { width: 25%; }
+    .i-width-large-3-4 { width: 75%; }
+
+    /* Fifths */
+    .i-width-large-1-5,
+    .i-width-large-2-10 { width: 20%; }
+    .i-width-large-2-5,
+    .i-width-large-4-10 { width: 40%; }
+    .i-width-large-3-5,
+    .i-width-large-6-10 { width: 60%; }
+    .i-width-large-4-5,
+    .i-width-large-8-10 { width: 80%; }
+
+    /* Sixths */
+    .i-width-large-1-6 { width: 16.666%; }
+    .i-width-large-5-6 { width: 83.333%; }
+
+    /* Tenths */
+    .i-width-large-1-10 { width: 10%; }
+    .i-width-large-3-10 { width: 30%; }
+    .i-width-large-7-10 { width: 70%; }
+    .i-width-large-9-10 { width: 90%; }
+
+}
+
+
+/* Sub-object: `i-push-*` and `i-pull-*`
+ ========================================================================== */
+
+/*
+ * Source ordering
+ * Works only with `i-width-medium-*`
+ */
+
+/* Tablet and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    [class*='i-push-'],
+    [class*='i-pull-'] { position: relative; }
+
+    /*
+     * Push
+     */
+
+    /* Halves */
+    .i-push-1-2,
+    .i-push-2-4,
+    .i-push-3-6,
+    .i-push-5-10 { left: 50%; }
+
+    /* Thirds */
+    .i-push-1-3,
+    .i-push-2-6 { left: 33.333%; }
+    .i-push-2-3,
+    .i-push-4-6 { left: 66.666%; }
+
+    /* Quarters */
+    .i-push-1-4 { left: 25%; }
+    .i-push-3-4 { left: 75%; }
+
+    /* Fifths */
+    .i-push-1-5,
+    .i-push-2-10 { left: 20%; }
+    .i-push-2-5,
+    .i-push-4-10 { left: 40%; }
+    .i-push-3-5,
+    .i-push-6-10 { left: 60%; }
+    .i-push-4-5,
+    .i-push-8-10 { left: 80%; }
+
+    /* Sixths */
+    .i-push-1-6 { left: 16.666%; }
+    .i-push-5-6 { left: 83.333%; }
+
+    /* Tenths */
+    .i-push-1-10 { left: 10%; }
+    .i-push-3-10 { left: 30%; }
+    .i-push-7-10 { left: 70%; }
+    .i-push-9-10 { left: 90%; }
+
+    /*
+     * Pull
+     */
+
+     /* Halves */
+     .i-pull-1-2,
+     .i-pull-2-4,
+     .i-pull-3-6,
+     .i-pull-5-10 { left: -50%; }
+
+     /* Thirds */
+     .i-pull-1-3,
+     .i-pull-2-6 { left: -33.333%; }
+     .i-pull-2-3,
+     .i-pull-4-6 { left: -66.666%; }
+
+     /* Quarters */
+     .i-pull-1-4 { left: -25%; }
+     .i-pull-3-4 { left: -75%; }
+
+     /* Fifths */
+     .i-pull-1-5,
+     .i-pull-2-10 { left: -20%; }
+     .i-pull-2-5,
+     .i-pull-4-10 { left: -40%; }
+     .i-pull-3-5,
+     .i-pull-6-10 { left: -60%; }
+     .i-pull-4-5,
+     .i-pull-8-10 { left: -80%; }
+
+     /* Sixths */
+     .i-pull-1-6 { left: -16.666%; }
+     .i-pull-5-6 { left: -83.333%; }
+
+     /* Tenths */
+     .i-pull-1-10 { left: -10%; }
+     .i-pull-3-10 { left: -30%; }
+     .i-pull-7-10 { left: -70%; }
+     .i-pull-9-10 { left: -90%; }
+
+}
+
+
+// Hooks
+// ========================================================================
+
+@include hook-grid-misc();
+
+// @mixin hook-grid-misc(){}

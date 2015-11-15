@@ -1,0 +1,197 @@
+// Name:            Datepicker
+// Description:     Defines styles for a datepicker
+//
+// Component:       `i-datepicker`
+//
+// Modifiers:       `i-datepicker-nav`
+//                  `i-datepicker-previous`
+//                  `i-datepicker-next`
+//                  `i-datepicker-heading`
+//                  `i-datepicker-table`
+//                  `i-datepicker-table-muted`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@datepicker-z-index:                            1050;
+@datepicker-animation:                          i-fade;
+
+@datepicker-nav-height:                         20px;
+@datepicker-nav-margin-bottom:                  15px;
+@datepicker-nav-color:                          #444;
+@datepicker-nav-hover-color:                    #444;
+@datepicker-previous-icon:                      "\f053";
+@datepicker-next-icon:                          "\f054";
+
+@datepicker-table-width:                        26px;
+@datepicker-table-height:                       24px;
+@datepicker-table-color:                        #444;
+
+@datepicker-table-hover-background:             #ddd;
+@datepicker-table-hover-color:                  #444;
+@datepicker-table-onclick-background:           #ccc;
+@datepicker-table-onclick-color:                #444;
+
+@datepicker-table-active-background:            #00a8e6;
+@datepicker-table-active-color:                 #fff;
+
+@datepicker-table-muted-color:                  #999;
+
+
+/* ========================================================================
+   Component: Datepicker
+ ========================================================================== */
+
+/*
+ * 1. Highest z-index
+ * 2. Reset dropdown width
+ * 3. Set animation
+ * 4. Needed for scale animation
+ */
+
+.i-datepicker {
+    /* 1 */
+    z-index: @datepicker-z-index;
+    /* 2 */
+    width: auto;
+    /* 3 */
+    -webkit-animation: @datepicker-animation 0.2s ease-in-out;
+    animation: @datepicker-animation 0.2s ease-in-out;
+    /* 4 */
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+
+/* Sub-object: `i-datepicker-nav`
+========================================================================== */
+
+.i-datepicker-nav {
+    margin-bottom: @datepicker-nav-margin-bottom;
+    text-align: center;
+    line-height: @datepicker-nav-height;
+    .hook-datepicker-nav;
+}
+
+/*
+ * Micro clearfix
+ */
+
+.i-datepicker-nav:before,
+.i-datepicker-nav:after {
+    content: "";
+    display: table;
+}
+
+.i-datepicker-nav:after { clear: both; }
+
+/*
+ * Previous and next navigation
+ */
+
+.i-datepicker-nav a {
+    color: @datepicker-nav-color;
+    text-decoration: none;
+    .hook-datepicker-nav-item;
+}
+
+.i-datepicker-nav a:hover { color: @datepicker-nav-hover-color; }
+
+.i-datepicker-previous { float: left; }
+.i-datepicker-next { float: right; }
+
+.i-datepicker-previous:after,
+.i-datepicker-next:after {
+    width: @datepicker-nav-height;
+    font-family: FontAwesome;
+}
+
+.i-datepicker-previous:after { content: @datepicker-previous-icon; }
+.i-datepicker-next:after { content: @datepicker-next-icon; }
+
+
+/* Sub-object: `i-datepicker-heading`
+========================================================================== */
+
+.i-datepicker-heading {}
+
+
+/* Sub-object: `i-datepicker-table`
+========================================================================== */
+
+/* Block element behavior */
+.i-datepicker-table { width: 100%; }
+
+.i-datepicker-table th,
+.i-datepicker-table td { padding: 2px; }
+
+.i-datepicker-table th { font-size: 12px; }
+
+/*
+ * Item
+ */
+
+.i-datepicker-table a {
+    display: block;
+    width: @datepicker-table-width;
+    line-height: @datepicker-table-height;
+    text-align: center;
+    color: @datepicker-table-color;
+    text-decoration: none;
+    .hook-datepicker-table-item;
+}
+
+/*
+ * Sub-object: `i-datepicker-table-muted`
+ */
+
+a.i-datepicker-table-muted { color: @datepicker-table-muted-color; }
+
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Remove default focus style
+ */
+
+.i-datepicker-table a:hover,
+.i-datepicker-table a:focus { // 1
+    background-color: @datepicker-table-hover-background;
+    color: @datepicker-table-hover-color;
+    /* 2 */
+    outline: none;
+    .hook-datepicker-table-item-hover;
+}
+
+/* OnClick */
+.i-datepicker-table a:active {
+    background-color: @datepicker-table-onclick-background;
+    color: @datepicker-table-onclick-color;
+    .hook-datepicker-table-item-onclick;
+}
+
+/*
+ * Active
+ */
+
+.i-datepicker-table a.i-active {
+    background: @datepicker-table-active-background;
+    color: @datepicker-table-active-color;
+    .hook-datepicker-table-item-active;
+}
+
+
+// Hooks
+// ========================================================================
+
+.hook-datepicker-misc;
+
+.hook-datepicker-nav() {}
+.hook-datepicker-nav-item() {}
+.hook-datepicker-table-item() {}
+.hook-datepicker-table-item-hover() {}
+.hook-datepicker-table-item-onclick() {}
+.hook-datepicker-table-item-active() {}
+.hook-datepicker-misc() {}

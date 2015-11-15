@@ -1,0 +1,283 @@
+// Name:            Dropdown
+// Description:     Defines styles for a toggleable dropdown
+//
+// Component:       `i-dropdown`
+//
+// Sub-objects:     `i-dropdown-overlay`
+//
+// Modifiers:       `i-dropdown-flip`
+//                  `i-dropdown-center`
+//                  `i-dropdown-justify`
+//                  `i-dropdown-up`
+//                  `i-dropdown-grid`
+//                  `i-dropdown-width-2`
+//                  `i-dropdown-width-3`
+//                  `i-dropdown-width-4`
+//                  `i-dropdown-width-5`
+//                  `i-dropdown-stack`
+//                  `i-dropdown-small`
+//                  `i-dropdown-navbar`
+//                  `i-dropdown-scrollable`
+//
+// States:          `i-open`
+//
+// Uses:            Animation
+//                  Grid: `i-width-*`
+//                  Panel: `i-panel`
+//                  Nav: `i-nav`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$dropdown-z-index:                               970 !default;
+$dropdown-width:                                 200px !default;
+$dropdown-margin-top:                            5px !default;
+$dropdown-padding:                               15px !default;
+$dropdown-background:                            #f5f5f5 !default;
+$dropdown-color:                                 #444 !default;
+$dropdown-font-size:                             1rem !default;
+$dropdown-animation:                             i-fade !default;
+
+$dropdown-divider-border-width:                  1px !default;
+$dropdown-divider-border:                        #ddd !default;
+
+$dropdown-small-padding:                         5px !default;
+
+$dropdown-navbar-margin:                         0 !default;
+$dropdown-navbar-background:                     #f5f5f5 !default;
+$dropdown-navbar-color:                          #444 !default;
+$dropdown-navbar-animation:                      i-slide-top-fixed !default;
+
+$dropdown-scrollable-height:                     200px !default;
+
+
+/* ========================================================================
+   Component: Dropdown
+ ========================================================================== */
+
+/*
+ * 1. Hide by default
+ * 2. Set position
+ * 3. Box-sizing is needed for `i-dropdown-justify`
+ * 4. Set style
+ * 5. Reset button group whitespace hack
+ */
+
+.i-dropdown {
+    /* 1 */
+    display: none;
+    /* 2 */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: $dropdown-z-index;
+    /* 3 */
+    box-sizing: border-box;
+    /* 4 */
+    width: $dropdown-width;
+    margin-top: $dropdown-margin-top;
+    padding: $dropdown-padding;
+    background: $dropdown-background;
+    color: $dropdown-color;
+    /* 5 */
+    font-size: $dropdown-font-size;
+    vertical-align: top;
+    @include hook-dropdown();
+}
+
+/*
+ * 1. Show dropdown
+ * 2. Set animation
+ * 3. Needed for scale animation
+ */
+
+.i-open > .i-dropdown {
+    /* 1 */
+    display: block;
+    /* 2 */
+    -webkit-animation: $dropdown-animation 0.2s ease-in-out;
+    animation: $dropdown-animation 0.2s ease-in-out;
+    /* 3 */
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+/* Alignment modifiers
+ ========================================================================== */
+
+/*
+ * Modifier `i-dropdown-flip`
+ */
+
+.i-dropdown-flip {
+    left: auto;
+    right: 0;
+}
+
+/*
+ * Modifier `i-dropdown-up`
+ */
+
+.i-dropdown-up {
+    top: auto;
+    bottom: 100%;
+    margin-top: auto;
+    margin-bottom: $dropdown-margin-top;
+}
+
+
+/* Nav in dropdown
+ ========================================================================== */
+
+.i-dropdown .i-nav { margin: 0 (-$dropdown-padding); }
+
+
+/* Grid and panel in dropdown
+ ========================================================================== */
+
+/*
+* Vertical gutter
+*/
+
+/*
+ * Grid
+ * Higher specificity to override large gutter
+ */
+
+.i-grid .i-dropdown-grid + .i-dropdown-grid { margin-top: $dropdown-padding; }
+
+/* Panels */
+.i-dropdown-grid > [class*='i-width-'] > .i-panel + .i-panel { margin-top: $dropdown-padding; }
+
+/* Tablet and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    /*
+     * Horizontal gutter
+     */
+
+    .i-dropdown:not(.i-dropdown-stack) > .i-dropdown-grid {
+        margin-left: -$dropdown-padding ;
+        margin-right: -$dropdown-padding;
+    }
+
+    .i-dropdown:not(.i-dropdown-stack) > .i-dropdown-grid > [class*='i-width-'] {
+        padding-left: $dropdown-padding;
+        padding-right: $dropdown-padding;
+    }
+
+    /*
+     * Column divider
+     */
+
+    .i-dropdown:not(.i-dropdown-stack) > .i-dropdown-grid > [class*='i-width-']:nth-child(n+2) { border-left: $dropdown-divider-border-width solid $dropdown-divider-border; }
+
+    /*
+     * Width multiplier for dropdown columns
+     */
+
+    .i-dropdown-width-2:not(.i-dropdown-stack) { width: ($dropdown-width * 2); }
+    .i-dropdown-width-3:not(.i-dropdown-stack) { width: ($dropdown-width * 3); }
+    .i-dropdown-width-4:not(.i-dropdown-stack) { width: ($dropdown-width * 4); }
+    .i-dropdown-width-5:not(.i-dropdown-stack) { width: ($dropdown-width * 5); }
+
+}
+
+/* Phone landscape and smaller */
+@media (max-width: $breakpoint-small-max) {
+
+    /*
+     * Stack columns and take full width
+     */
+
+    .i-dropdown-grid > [class*='i-width-'] { width: 100%; }
+
+    /*
+     * Vertical gutter
+     */
+
+    .i-dropdown-grid > [class*='i-width-']:nth-child(n+2) { margin-top: $dropdown-padding; }
+
+}
+
+/*
+* Stack grid columns
+*/
+
+.i-dropdown-stack > .i-dropdown-grid > [class*='i-width-'] { width: 100%; }
+
+.i-dropdown-stack > .i-dropdown-grid > [class*='i-width-']:nth-child(n+2) { margin-top: $dropdown-padding; }
+
+
+
+/* Modifier `i-dropdown-small`
+ ========================================================================== */
+
+/*
+ * Set min-width and text expands dropdown if needed
+ */
+
+.i-dropdown-small {
+    min-width: 150px;
+    width: auto;
+    padding: $dropdown-small-padding;
+    white-space: nowrap;
+}
+
+/*
+ * Nav in dropdown
+ */
+
+.i-dropdown-small .i-nav { margin: 0 (-$dropdown-small-padding); }
+
+
+/* Modifier: `i-dropdown-navbar`
+ ========================================================================== */
+
+.i-dropdown-navbar {
+    margin-top: $dropdown-navbar-margin;
+    background: $dropdown-navbar-background;
+    color: $dropdown-navbar-color;
+    @include hook-dropdown-navbar();
+}
+
+.i-open > .i-dropdown-navbar {
+    -webkit-animation: $dropdown-navbar-animation 0.2s ease-in-out;
+    animation: $dropdown-navbar-animation 0.2s ease-in-out;
+}
+
+
+/* Modifier `i-dropdown-scrollable`
+ ========================================================================== */
+
+/*
+ * Usefull for long lists
+ */
+
+.i-dropdown-scrollable {
+    overflow-y: auto;
+    max-height: $dropdown-scrollable-height;
+}
+
+
+/* Sub-object: `i-dropdown-overlay`
+ ========================================================================== */
+
+.i-dropdown-overlay {
+    @include hook-dropdown-overlay();
+}
+
+
+
+// Hooks
+// ========================================================================
+
+@include hook-dropdown-misc();
+
+// @mixin hook-dropdown(){}
+// @mixin hook-dropdown-navbar(){}
+// @mixin hook-dropdown-overlay(){}
+// @mixin hook-dropdown-misc(){}

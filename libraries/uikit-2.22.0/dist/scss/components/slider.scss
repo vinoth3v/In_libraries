@@ -1,0 +1,131 @@
+// Name:            Slider
+// Description:     Defines styles for a horizontal slider
+//
+// Component:       `i-slider`
+//
+// Sub-objects:     `i-slider-container`
+//
+// Modifier:        `i-slider-fullscreen`
+//
+// States:          `i-drag`
+//
+// Markup:
+//
+// <!-- i-slider -->
+// <div data-i-slider>
+//     <div class="i-slider-container">
+//         <ul class="i-slider">
+//             <li></li>
+//             <li></li>
+//         </ul>
+//     </div>
+// </div>
+//
+// ========================================================================
+
+
+/* ========================================================================
+   Component: Slider
+ ========================================================================== */
+
+/*
+ * 1. Create position context
+ * 2. Create stacking context to prevent z-index issues with other components
+ * 3. Deactivate browser history navigation in IE11
+ */
+
+.i-slider {
+    /* 1 */
+    position: relative;
+    /* 2 */
+    z-index: 0;
+    /* 3 */
+    touch-action: pan-y;
+}
+
+/*
+ * 1. Reset list style without interfering with grid
+ */
+
+.i-slider:not(.i-grid) {
+    /* 1 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*
+ * Sub-object item
+ * 1. Position items above each other
+ */
+
+.i-slider > * {
+    /* 1 */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/*
+ * Clip child elements
+ */
+
+.i-slider-container { overflow: hidden; }
+
+/*
+ * Dragged
+ */
+
+.i-slider:not(.i-drag) {
+    -webkit-transition: -webkit-transform 200ms linear;
+    transition: transform 200ms linear;
+}
+
+/*
+ * 1. Makes text unselectable
+ */
+
+.i-slider.i-drag {
+    cursor: col-resize;
+    /* 1 */
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/*
+ * 1. Prevents images and links from being dragged (default browser behavior)
+ * 2. Disables the default callout shown when you touch and hold a touch target
+ * Currently only works in Webkit
+ */
+
+.i-slider a,
+.i-slider img {
+    /* 1 */
+    -webkit-user-drag: none;
+    user-drag: none;
+    /* 2 */
+    -webkit-touch-callout: none;
+}
+
+/*
+ * 1. Prevents images and links from being dragged in Firefox
+ */
+
+.i-slider img { pointer-events: none; }
+
+
+/* Modifier: `i-slider-fullscreen`
+ ========================================================================== */
+
+.i-slider-fullscreen,
+.i-slider-fullscreen > li { height: 100vh; }
+
+
+// Hooks
+// ========================================================================
+
+@include hook-slider-misc();
+
+// @mixin hook-slider-misc(){}

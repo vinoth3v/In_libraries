@@ -1,0 +1,34 @@
+// Name:            Upload
+// Description:     Provides a dragover state for uploads
+//
+// Component:       `i-upload`
+//
+// States:          `i-dragover`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$i-upload-dragover-box-shadow:                  rgba(100,100,100,0.3) !default;
+$i-upload-dragover-box-shadow-blur:             20px !default;
+
+
+/* ========================================================================
+   Component: Upload
+ ========================================================================== */
+
+/*
+ * Create a box-shadow when dragging a file over the upload area
+ */
+
+.i-dragover { box-shadow: 0 0 $i-upload-dragover-box-shadow-blur $i-upload-dragover-box-shadow; }
+
+
+// Hooks
+// ========================================================================
+
+@include hook-upload-misc();
+
+// @mixin hook-upload-misc(){}

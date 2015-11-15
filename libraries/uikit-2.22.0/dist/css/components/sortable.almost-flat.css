@@ -1,0 +1,62 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Sortable
+ ========================================================================== */
+.i-sortable {
+  position: relative;
+}
+/*
+ * Deactivate browser touch actions in IE11
+ */
+.i-sortable > * {
+  touch-action: none;
+}
+/*
+ * Disables the default callout shown when you touch and hold a touch target
+ * Currently only works in Webkit
+ */
+.i-sortable a,
+.i-sortable img {
+  -webkit-touch-callout: none;
+}
+/*
+ * Remove margin from the last-child
+ */
+.i-sortable > :last-child {
+  margin-bottom: 0;
+}
+/* Sub-modifier `i-sortable-dragged`
+ ========================================================================== */
+.i-sortable-dragged {
+  position: absolute;
+  z-index: 1050;
+  pointer-events: none;
+}
+/* Sub-modifier `i-sortable-placeholder`
+ ========================================================================== */
+.i-sortable-placeholder {
+  opacity: 0;
+}
+/* Empty List
+ ========================================================================== */
+.i-sortable-empty {
+  min-height: 30px;
+}
+/* Sub-object `i-sortable-handle`
+ ========================================================================== */
+/*
+ * Deactivate browser touch actions in IE11
+ */
+.i-sortable-handle {
+  touch-action: none;
+}
+/* Hover */
+.i-sortable-handle:hover {
+  cursor: move;
+}
+/* Sub-object `i-sortable-moving`
+ ========================================================================== */
+.i-sortable-moving,
+.i-sortable-moving * {
+  cursor: move;
+}

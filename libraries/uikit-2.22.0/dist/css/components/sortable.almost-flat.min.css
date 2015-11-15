@@ -1,0 +1,2 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+.i-sortable{position:relative}.i-sortable>*{touch-action:none}.i-sortable a,.i-sortable img{-webkit-touch-callout:none}.i-sortable>:last-child{margin-bottom:0}.i-sortable-dragged{position:absolute;z-index:1050;pointer-events:none}.i-sortable-placeholder{opacity:0}.i-sortable-empty{min-height:30px}.i-sortable-handle{touch-action:none}.i-sortable-handle:hover{cursor:move}.i-sortable-moving,.i-sortable-moving *{cursor:move}

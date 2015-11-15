@@ -1,0 +1,140 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Slideshow
+ ========================================================================== */
+/*
+ * 1. Create position context
+ * 2. Create stacking context to prevent z-index issues with other components
+ * 3. Set width because child elements are positioned absolute. Height is set via JS
+ * 4. Reset list style
+ * 5. Clip child elements
+ * 6. Deactivate browser history navigation in IE11
+ */
+.i-slideshow {
+  /* 1 */
+  position: relative;
+  /* 2 */
+  z-index: 0;
+  /* 3 */
+  width: 100%;
+  /* 4 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* 5 */
+  overflow: hidden;
+  /* 6 */
+  touch-action: pan-y;
+}
+/*
+ * Sub-object item
+ * 1. Position items above each other
+ * 2. Expand to parent container width
+ * 3. Hide by default
+ */
+.i-slideshow > li {
+  /* 1 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* 2 */
+  width: 100%;
+  /* 3 */
+  opacity: 0;
+}
+/*
+ * Active
+ * 1. Stack at first
+ * 2. Show slide
+ */
+.i-slideshow > .i-active {
+  /* 1 */
+  z-index: 10;
+  /* 2 */
+  opacity: 1;
+}
+/*
+ * Hide default images which is only relevant to keep existing proportions
+ */
+.i-slideshow > li > img {
+  visibility: hidden;
+}
+/*
+ * Pointer for controls
+ */
+[data-i-slideshow-slide] {
+  cursor: pointer;
+}
+/* Modifier: `i-slideshow-fullscreen`
+ ========================================================================== */
+.i-slideshow-fullscreen,
+.i-slideshow-fullscreen > li {
+  height: 100vh;
+}
+/* Animations
+ ========================================================================== */
+/*
+ * Fade
+ */
+.i-slideshow-fade-out {
+  -webkit-animation: i-fade 0.5s linear reverse;
+  animation: i-fade 0.5s linear reverse;
+}
+/*
+ * Scroll
+ */
+.i-slideshow-scroll-forward-in {
+  -webkit-animation: i-slide-right 0.5s ease-in-out;
+  animation: i-slide-right 0.5s ease-in-out;
+}
+.i-slideshow-scroll-forward-out {
+  -webkit-animation: i-slide-left 0.5s ease-in-out reverse;
+  animation: i-slide-left 0.5s ease-in-out reverse;
+}
+.i-slideshow-scroll-backward-in {
+  -webkit-animation: i-slide-left 0.5s ease-in-out;
+  animation: i-slide-left 0.5s ease-in-out;
+}
+.i-slideshow-scroll-backward-out {
+  -webkit-animation: i-slide-right 0.5s ease-in-out reverse;
+  animation: i-slide-right 0.5s ease-in-out reverse;
+}
+/*
+ * Scale
+ */
+.i-slideshow-scale-out {
+  -webkit-animation: i-fade-scale-15 0.5s ease-in-out reverse;
+  animation: i-fade-scale-15 0.5s ease-in-out reverse;
+}
+/*
+ * Swipe
+ */
+.i-slideshow-swipe-forward-in {
+  -webkit-animation: i-slide-left-33 0.5s ease-in-out;
+  animation: i-slide-left-33 0.5s ease-in-out;
+}
+.i-slideshow-swipe-forward-out {
+  -webkit-animation: i-slide-left 0.5s ease-in-out reverse;
+  animation: i-slide-left 0.5s ease-in-out reverse;
+}
+.i-slideshow-swipe-backward-in {
+  -webkit-animation: i-slide-right-33 0.5s ease-in-out;
+  animation: i-slide-right-33 0.5s ease-in-out;
+}
+.i-slideshow-swipe-backward-out {
+  -webkit-animation: i-slide-right 0.5s ease-in-out reverse;
+  animation: i-slide-right 0.5s ease-in-out reverse;
+}
+.i-slideshow-swipe-forward-in:before,
+.i-slideshow-swipe-backward-in:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.6);
+  -webkit-animation: i-fade 0.5s ease-in-out reverse;
+  animation: i-fade 0.5s ease-in-out reverse;
+}

@@ -1,0 +1,43 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Accordion
+ ========================================================================== */
+/* Sub-object: `n-accordion-title`
+ ========================================================================== */
+.n-accordion-title {
+  margin-top: 0;
+  margin-bottom: 15px;
+  padding: 5px 15px;
+  background: #f7f7f7;
+  font-size: 18px;
+  line-height: 24px;
+  cursor: pointer;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+}
+/* Sub-object: `n-accordion-content`
+ ========================================================================== */
+.n-accordion-content {
+  padding: 0 15px 15px 15px;
+}
+/*
+ * Micro clearfix to make panels more robust
+ */
+.n-accordion-content:before,
+.n-accordion-content:after {
+  content: "";
+  display: table;
+}
+.n-accordion-content:after {
+  clear: both;
+}
+/*
+ * Remove margin from the last-child
+ */
+.n-accordion-content > :last-child {
+  margin-bottom: 0;
+}

@@ -1,0 +1,103 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Slidenav
+ ========================================================================== */
+/*
+ * 1. Required for `a` elements
+ * 2. Dimension
+ * 3. Style
+ */
+.n-slidenav {
+  /* 1 */
+  display: inline-block;
+  /* 2 */
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 60px;
+  height: 60px;
+  /* 3 */
+  line-height: 60px;
+  color: rgba(50, 50, 50, 0.4);
+  font-size: 60px;
+  text-align: center;
+}
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Remove default focus style
+ * 3. Required for `a` elements
+ * 4. Style
+ */
+.n-slidenav:hover,
+.n-slidenav:focus {
+  /* 2 */
+  outline: none;
+  /* 3 */
+  text-decoration: none;
+  /* 4 */
+  color: rgba(50, 50, 50, 0.7);
+  cursor: pointer;
+}
+/* Active */
+.n-slidenav:active {
+  color: rgba(50, 50, 50, 0.9);
+}
+/*
+ * Icons
+ */
+.n-slidenav-previous:before {
+  content: "\f104";
+  font-family: FontAwesome;
+}
+.n-slidenav-next:before {
+  content: "\f105";
+  font-family: FontAwesome;
+}
+/* Sub-object: `n-slidenav-position`
+ ========================================================================== */
+/*
+ * Create position context
+ */
+.n-slidenav-position {
+  position: relative;
+}
+/*
+ * Center vertically
+ */
+.n-slidenav-position .n-slidenav {
+  display: none;
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  margin-top: -30px;
+}
+.n-slidenav-position:hover .n-slidenav {
+  display: block;
+}
+.n-slidenav-position .n-slidenav-previous {
+  left: 20px;
+}
+.n-slidenav-position .n-slidenav-next {
+  right: 20px;
+}
+/* Modifier: `n-slidenav-contrast`
+ ========================================================================== */
+.n-slidenav-contrast {
+  color: rgba(255, 255, 255, 0.5);
+}
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ */
+.n-slidenav-contrast:hover,
+.n-slidenav-contrast:focus {
+  color: rgba(255, 255, 255, 0.7);
+}
+/* Active */
+.n-slidenav-contrast:active {
+  color: rgba(255, 255, 255, 0.9);
+}

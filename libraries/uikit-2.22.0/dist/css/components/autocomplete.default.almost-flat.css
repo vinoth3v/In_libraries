@@ -1,0 +1,54 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Autocomplete
+ ========================================================================== */
+/*
+ * 1. Container width fits its content
+ * 2. Create position context
+ * 3. Prevent `inline-block` consequences
+ * 4. Remove the gap between the container and its child element
+ */
+.n-autocomplete {
+  /* 1 */
+  display: inline-block;
+  /* 2 */
+  position: relative;
+  /* 3 */
+  max-width: 100%;
+  /* 4 */
+  vertical-align: middle;
+}
+/* Nav modifier `n-nav-autocomplete`
+ ========================================================================== */
+/*
+ * Items
+ */
+.n-nav-autocomplete > li > a {
+  color: #444444;
+}
+/*
+ * Active
+ * 1. Remove default focus style
+ */
+.n-nav-autocomplete > li.n-active > a {
+  background: #00a8e6;
+  color: #ffffff;
+  /* 1 */
+  outline: none;
+}
+/*
+ * Sub-object: `n-nav-header`
+ */
+.n-nav-autocomplete .n-nav-header {
+  color: #999999;
+}
+/*
+ * Sub-object: `n-nav-divider`
+ */
+.n-nav-autocomplete .n-nav-divider {
+  border-top: 1px solid #dddddd;
+}

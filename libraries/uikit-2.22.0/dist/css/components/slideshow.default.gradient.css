@@ -1,0 +1,144 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.21.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Slideshow
+ ========================================================================== */
+/*
+ * 1. Create position context
+ * 2. Create stacking context to prevent z-index issues with other components
+ * 3. Set width because child elements are positioned absolute. Height is set via JS
+ * 4. Reset list style
+ * 5. Clip child elements
+ * 6. Deactivate browser history navigation in IE11
+ */
+.n-slideshow {
+  /* 1 */
+  position: relative;
+  /* 2 */
+  z-index: 0;
+  /* 3 */
+  width: 100%;
+  /* 4 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* 5 */
+  overflow: hidden;
+  /* 6 */
+  touch-action: pan-y;
+}
+/*
+ * Sub-object item
+ * 1. Position items above each other
+ * 2. Expand to parent container width
+ * 3. Hide by default
+ */
+.n-slideshow > li {
+  /* 1 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* 2 */
+  width: 100%;
+  /* 3 */
+  opacity: 0;
+}
+/*
+ * Active
+ * 1. Stack at first
+ * 2. Show slide
+ */
+.n-slideshow > .n-active {
+  /* 1 */
+  z-index: 10;
+  /* 2 */
+  opacity: 1;
+}
+/*
+ * Hide default images which is only relevant to keep existing proportions
+ */
+.n-slideshow > li > img {
+  visibility: hidden;
+}
+/*
+ * Pointer for controls
+ */
+[data-n-slideshow-slide] {
+  cursor: pointer;
+}
+/* Modifier: `n-slideshow-fullscreen`
+ ========================================================================== */
+.n-slideshow-fullscreen,
+.n-slideshow-fullscreen > li {
+  height: 100vh;
+}
+/* Animations
+ ========================================================================== */
+/*
+ * Fade
+ */
+.n-slideshow-fade-out {
+  -webkit-animation: n-fade 0.5s linear reverse;
+  animation: n-fade 0.5s linear reverse;
+}
+/*
+ * Scroll
+ */
+.n-slideshow-scroll-forward-in {
+  -webkit-animation: n-slide-right 0.5s ease-in-out;
+  animation: n-slide-right 0.5s ease-in-out;
+}
+.n-slideshow-scroll-forward-out {
+  -webkit-animation: n-slide-left 0.5s ease-in-out reverse;
+  animation: n-slide-left 0.5s ease-in-out reverse;
+}
+.n-slideshow-scroll-backward-in {
+  -webkit-animation: n-slide-left 0.5s ease-in-out;
+  animation: n-slide-left 0.5s ease-in-out;
+}
+.n-slideshow-scroll-backward-out {
+  -webkit-animation: n-slide-right 0.5s ease-in-out reverse;
+  animation: n-slide-right 0.5s ease-in-out reverse;
+}
+/*
+ * Scale
+ */
+.n-slideshow-scale-out {
+  -webkit-animation: n-fade-scale-15 0.5s ease-in-out reverse;
+  animation: n-fade-scale-15 0.5s ease-in-out reverse;
+}
+/*
+ * Swipe
+ */
+.n-slideshow-swipe-forward-in {
+  -webkit-animation: n-slide-left-33 0.5s ease-in-out;
+  animation: n-slide-left-33 0.5s ease-in-out;
+}
+.n-slideshow-swipe-forward-out {
+  -webkit-animation: n-slide-left 0.5s ease-in-out reverse;
+  animation: n-slide-left 0.5s ease-in-out reverse;
+}
+.n-slideshow-swipe-backward-in {
+  -webkit-animation: n-slide-right-33 0.5s ease-in-out;
+  animation: n-slide-right-33 0.5s ease-in-out;
+}
+.n-slideshow-swipe-backward-out {
+  -webkit-animation: n-slide-right 0.5s ease-in-out reverse;
+  animation: n-slide-right 0.5s ease-in-out reverse;
+}
+.n-slideshow-swipe-forward-in:before,
+.n-slideshow-swipe-backward-in:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.6);
+  -webkit-animation: n-fade 0.5s ease-in-out reverse;
+  animation: n-fade 0.5s ease-in-out reverse;
+}

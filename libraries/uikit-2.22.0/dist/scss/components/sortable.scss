@@ -1,0 +1,122 @@
+// Name:            Sortable
+// Description:     Defines styles for sortable grids and lists
+//
+// Component:       `i-sortable`
+//
+// Sub-objects:     `i-sortable-handle`
+//                  `i-sortable-moving`
+//
+// Modifier:        `i-sortable-dragged`
+//                  `i-sortable-placeholder`
+//
+// Markup:
+//
+// <!-- i-sortable -->
+// <ul class="i-sortable" data-i-sortable>
+//     <li></li>
+//     <li></li>
+// </ul>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$sortable-dragged-z-index:                       1050 !default;
+
+$sortable-placeholder-opacity:                   0 !default;
+
+$sortable-empty-height:                          30px !default;
+
+
+/* ========================================================================
+   Component: Sortable
+ ========================================================================== */
+
+.i-sortable {
+    position: relative;
+    @include hook-sortable();
+}
+
+/*
+ * Deactivate browser touch actions in IE11
+ */
+
+.i-sortable > * { touch-action: none; }
+
+/*
+ * Disables the default callout shown when you touch and hold a touch target
+ * Currently only works in Webkit
+ */
+
+.i-sortable a,
+.i-sortable img { -webkit-touch-callout: none; }
+
+/*
+ * Remove margin from the last-child
+ */
+
+.i-sortable > :last-child { margin-bottom: 0; }
+
+
+/* Sub-modifier `i-sortable-dragged`
+ ========================================================================== */
+
+.i-sortable-dragged {
+    position: absolute;
+    z-index: $sortable-dragged-z-index;
+    pointer-events: none;
+    @include hook-sortable-dragged();
+}
+
+
+/* Sub-modifier `i-sortable-placeholder`
+ ========================================================================== */
+
+.i-sortable-placeholder {
+    opacity: $sortable-placeholder-opacity;
+    @include hook-sortable-placeholder();
+}
+
+
+/* Empty List
+ ========================================================================== */
+
+.i-sortable-empty {
+    min-height: $sortable-empty-height;
+    @include hook-sortable-empty();
+}
+
+
+/* Sub-object `i-sortable-handle`
+ ========================================================================== */
+
+/*
+ * Deactivate browser touch actions in IE11
+ */
+
+.i-sortable-handle { touch-action: none; }
+
+/* Hover */
+.i-sortable-handle:hover { cursor: move; }
+
+
+/* Sub-object `i-sortable-moving`
+ ========================================================================== */
+
+.i-sortable-moving,
+/* Needed if moving over links or buttons */
+.i-sortable-moving * { cursor: move; }
+
+
+// Hooks
+// ========================================================================
+
+@include hook-sortable-misc();
+
+// @mixin hook-sortable(){}
+// @mixin hook-sortable-dragged(){}
+// @mixin hook-sortable-placeholder(){}
+// @mixin hook-sortable-empty(){}
+// @mixin hook-sortable-misc(){}

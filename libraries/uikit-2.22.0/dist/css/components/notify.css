@@ -1,0 +1,92 @@
+/*! UIkit 2.22.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Notify
+ ========================================================================== */
+/*
+ * Message container for positioning
+ */
+.i-notify {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1040;
+  box-sizing: border-box;
+  width: 350px;
+}
+/* Position modifiers
+========================================================================== */
+.i-notify-top-right,
+.i-notify-bottom-right {
+  left: auto;
+  right: 10px;
+}
+.i-notify-top-center,
+.i-notify-bottom-center {
+  left: 50%;
+  margin-left: -175px;
+}
+.i-notify-bottom-left,
+.i-notify-bottom-right,
+.i-notify-bottom-center {
+  top: auto;
+  bottom: 10px;
+}
+/* Responsiveness
+========================================================================== */
+/* Phones portrait and smaller */
+@media (max-width: 479px) {
+  /*
+     * Fit in small screen
+     */
+  .i-notify {
+    left: 10px;
+    right: 10px;
+    width: auto;
+    margin: 0;
+  }
+}
+/* Sub-object: `i-notify-message`
+========================================================================== */
+.i-notify-message {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 15px;
+  background: #444444;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 22px;
+  cursor: pointer;
+}
+/* Close in notify
+ ========================================================================== */
+.i-notify-message > .i-close {
+  visibility: hidden;
+  float: right;
+}
+.i-notify-message:hover > .i-close {
+  visibility: visible;
+}
+/* Modifier: `i-alert-info`
+ ========================================================================== */
+.i-notify-message-primary {
+  background: #ebf7fd;
+  color: #2d7091;
+}
+/* Modifier: `i-alert-success`
+ ========================================================================== */
+.i-notify-message-success {
+  background: #f2fae3;
+  color: #659f13;
+}
+/* Modifier: `i-notify-message-warning`
+ ========================================================================== */
+.i-notify-message-warning {
+  background: #fffceb;
+  color: #e28327;
+}
+/* Modifier: `i-notify-message-danger`
+ ========================================================================== */
+.i-notify-message-danger {
+  background: #fff1f0;
+  color: #d85030;
+}

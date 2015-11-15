@@ -1,0 +1,468 @@
+// Name:            Nav
+// Description:     Defines styles for list navigations
+//
+// Component:       `i-nav`
+//
+// Sub-objects:     `i-nav-header`
+//                  `i-nav-divider`
+//                  `i-nav-sub`
+//
+// Modifiers:       `i-nav-parent-icon`
+//                  `i-nav-side`
+//                  `i-nav-dropdown`
+//                  `i-nav-navbar`
+//                  `i-nav-offcanvas`
+//
+// States:          `i-active`
+//                  `i-parent`
+//                  `i-open`
+//                  `i-touch`
+//
+// Uses:            Icon: FontAwesome
+//
+// Used by:         Panel
+//                  Dropdown
+//
+// Markup:
+//
+// <!-- i-nav -->
+// <ul class="i-nav">
+//     <li class="i-active"><a href=""></a></li>
+//     <li><a href=""></a></li>
+// </ul>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$nav-padding-vertical:                           5px !default;
+$nav-padding-horizontal:                         15px !default;
+
+$nav-header-padding-vertical:                    $nav-padding-vertical !default;
+$nav-header-padding-horizontal:                  $nav-padding-horizontal !default;
+$nav-header-font-size:                           12px !default;
+$nav-header-font-weight:                         bold !default;
+$nav-header-text-transform:                      uppercase !default;
+$nav-header-margin-top:                          15px !default;
+
+$nav-divider-margin-vertical:                    9px !default;
+$nav-divider-margin-horizontal:                  $nav-padding-horizontal !default;
+
+$nav-subtitle-font-size:                         12px !default;
+$nav-subtitle-line-height:                       18px !default;
+
+$nav-nested-padding-left:                        15px !default;
+$nav-nested-padding-vertical:                    2px !default;
+$nav-nested-padding-horizontal:                  0 !default;
+
+$nav-sub-padding-vertical:                       5px !default;
+$nav-sub-padding-left:                           $nav-padding-horizontal !default;
+
+$nav-parent-icon:                                "\f104" !default;
+$nav-parent-open-icon:                           "\f107" !default;
+$nav-parent-icon-width:                          20px !default;
+$nav-parent-icon-margin-right:                   -10px !default;
+
+$nav-side-color:                                 #444 !default;
+$nav-side-hover-background:                      rgba(0,0,0,0.05) !default;
+$nav-side-hover-color:                           #444 !default;
+$nav-side-active-background:                     #00a8e6 !default;
+$nav-side-active-color:                          #fff !default;
+$nav-side-header-color:                          #444 !default;
+$nav-side-divider-border:                        #ddd !default;
+$nav-side-divider-border-width:                  1px !default;
+$nav-side-nested-color:                          #07D !default;
+$nav-side-nested-hover-color:                    #059 !default;
+
+$nav-dropdown-color:                             #444 !default;
+$nav-dropdown-hover-background:                  #00a8e6 !default;
+$nav-dropdown-hover-color:                       #fff !default;
+$nav-dropdown-header-color:                      #999 !default;
+$nav-dropdown-divider-border:                    #ddd !default;
+$nav-dropdown-divider-border-width:              1px !default;
+$nav-dropdown-nested-color:                      #07D !default;
+$nav-dropdown-nested-hover-color:                #059 !default;
+
+$nav-navbar-color:                               #444 !default;
+$nav-navbar-hover-background:                    #00a8e6 !default;
+$nav-navbar-hover-color:                         #fff !default;
+$nav-navbar-header-color:                        #999 !default;
+$nav-navbar-divider-border:                      #ddd !default;
+$nav-navbar-divider-border-width:                1px !default;
+$nav-navbar-nested-color:                        #07D !default;
+$nav-navbar-nested-hover-color:                  #059 !default;
+
+$nav-offcanvas-padding-vertical:                 10px !default;
+$nav-offcanvas-padding-horizontal:               15px !default;
+$nav-offcanvas-color:                            #ccc !default;
+$nav-offcanvas-hover-background:                 #404040 !default;
+$nav-offcanvas-hover-color:                      #fff !default;
+$nav-offcanvas-active-background:                #1a1a1a !default;
+$nav-offcanvas-active-color:                     #fff !default;
+$nav-offcanvas-header-color:                     #777 !default;
+$nav-offcanvas-divider-border:                   #1a1a1a !default;
+$nav-offcanvas-divider-border-width:             1px !default;
+$nav-offcanvas-nested-color:                     #ccc !default;
+$nav-offcanvas-nested-hover-color:               #fff !default;
+
+
+/* ========================================================================
+   Component: Nav
+ ========================================================================== */
+
+.i-nav,
+.i-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*
+ * Items
+ */
+
+.i-nav li > a {
+    display: block;
+    text-decoration: none;
+}
+
+.i-nav > li > a { padding: $nav-padding-vertical $nav-padding-horizontal; }
+
+/*
+ * Nested items
+ */
+
+.i-nav ul { padding-left: $nav-nested-padding-left; }
+
+.i-nav ul a { padding: $nav-nested-padding-vertical $nav-nested-padding-horizontal; }
+
+/*
+ * Item subtitle
+ */
+
+.i-nav li > a > div {
+    font-size: $nav-subtitle-font-size;
+    line-height: $nav-subtitle-line-height;
+}
+
+
+/* Sub-object: `i-nav-header`
+ ========================================================================== */
+
+.i-nav-header {
+    padding: $nav-header-padding-vertical $nav-header-padding-horizontal;
+    text-transform: $nav-header-text-transform;
+    font-weight: $nav-header-font-weight;
+    font-size: $nav-header-font-size;
+    @include hook-nav-header();
+}
+
+.i-nav-header:not(:first-child) { margin-top: $nav-header-margin-top; }
+
+
+/* Sub-object: `i-nav-divider`
+ ========================================================================== */
+
+.i-nav-divider {
+    margin: $nav-divider-margin-vertical $nav-divider-margin-horizontal;
+    @include hook-nav-divider();
+}
+
+
+/* Sub-object: `i-nav-sub`
+ ========================================================================== */
+
+/*
+ * `ul` needed for higher specificity to override padding
+ */
+
+ul.i-nav-sub {
+    padding: $nav-sub-padding-vertical 0 $nav-sub-padding-vertical $nav-sub-padding-left;
+    @include hook-nav-sub();
+}
+
+
+/* Modifier: `i-nav-parent-icon`
+ ========================================================================== */
+
+.i-nav-parent-icon > .i-parent > a:after {
+    content: $nav-parent-icon;
+    width: $nav-parent-icon-width;
+    margin-right: $nav-parent-icon-margin-right;
+    float: right;
+    font-family: FontAwesome;
+    text-align: center;
+    @include hook-nav-parent-icon();
+}
+
+.i-nav-parent-icon > .i-parent.i-open > a:after { content: $nav-parent-open-icon; }
+
+
+/* Modifier `i-nav-side`
+ ========================================================================== */
+
+/*
+ * Items
+ */
+
+.i-nav-side > li > a {
+    color: $nav-side-color;
+    @include hook-nav-side();
+}
+
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Remove default focus style
+ */
+
+.i-nav-side > li > a:hover,
+.i-nav-side > li > a:focus { // 1
+    background: $nav-side-hover-background;
+    color: $nav-side-hover-color;
+    /* 2 */
+    outline: none;
+    @include hook-nav-side-hover();
+}
+
+/* Active */
+.i-nav-side > li.i-active > a {
+    background: $nav-side-active-background;
+    color: $nav-side-active-color;
+    @include hook-nav-side-active();
+}
+
+/*
+ * Sub-object: `i-nav-header`
+ */
+
+.i-nav-side .i-nav-header {
+    color: $nav-side-header-color;
+    @include hook-nav-side-header();
+}
+
+/*
+ * Sub-object: `i-nav-divider`
+ */
+
+.i-nav-side .i-nav-divider {
+    border-top: $nav-side-divider-border-width solid $nav-side-divider-border;
+    @include hook-nav-side-divider();
+}
+
+/*
+ * Nested items
+ */
+
+.i-nav-side ul a { color: $nav-side-nested-color; }
+.i-nav-side ul a:hover { color: $nav-side-nested-hover-color; }
+
+
+/* Modifier `i-nav-dropdown`
+ ========================================================================== */
+
+/*
+ * Items
+ */
+
+.i-nav-dropdown > li > a {
+    color: $nav-dropdown-color;
+    @include hook-nav-dropdown();
+}
+
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Remove default focus style
+ */
+
+.i-nav-dropdown > li > a:hover,
+.i-nav-dropdown > li > a:focus { // 1
+    background: $nav-dropdown-hover-background;
+    color: $nav-dropdown-hover-color;
+    /* 2 */
+    outline: none;
+    @include hook-nav-dropdown-hover();
+}
+
+/*
+ * Sub-object: `i-nav-header`
+ */
+
+.i-nav-dropdown .i-nav-header {
+    color: $nav-dropdown-header-color;
+    @include hook-nav-dropdown-header();
+}
+
+/*
+ * Sub-object: `i-nav-divider`
+ */
+
+.i-nav-dropdown .i-nav-divider {
+    border-top: $nav-dropdown-divider-border-width solid $nav-dropdown-divider-border;
+    @include hook-nav-dropdown-divider();
+}
+
+/*
+ * Nested items
+ */
+
+.i-nav-dropdown ul a { color: $nav-dropdown-nested-color; }
+.i-nav-dropdown ul a:hover { color: $nav-dropdown-nested-hover-color; }
+
+
+/* Modifier `i-nav-navbar`
+ ========================================================================== */
+
+/*
+ * Items
+ */
+
+.i-nav-navbar > li > a {
+    color: $nav-navbar-color;
+    @include hook-nav-navbar();
+}
+
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Remove default focus style
+ */
+
+.i-nav-navbar > li > a:hover,
+.i-nav-navbar > li > a:focus { // 1
+    background: $nav-navbar-hover-background;
+    color: $nav-navbar-hover-color;
+    /* 2 */
+    outline: none;
+    @include hook-nav-navbar-hover();
+}
+
+/*
+ * Sub-object: `i-nav-header`
+ */
+
+.i-nav-navbar .i-nav-header {
+    color: $nav-navbar-header-color;
+    @include hook-nav-navbar-header();
+}
+
+/*
+ * Sub-object: `i-nav-divider`
+ */
+
+.i-nav-navbar .i-nav-divider {
+    border-top: $nav-navbar-divider-border-width solid $nav-navbar-divider-border;
+    @include hook-nav-navbar-divider();
+}
+
+/*
+ * Nested items
+ */
+
+.i-nav-navbar ul a { color: $nav-navbar-nested-color; }
+.i-nav-navbar ul a:hover { color: $nav-navbar-nested-hover-color; }
+
+
+/* Modifier `i-nav-offcanvas`
+ ========================================================================== */
+
+/*
+ * Items
+ */
+
+.i-nav-offcanvas > li > a {
+    color: $nav-offcanvas-color;
+    padding: $nav-offcanvas-padding-vertical $nav-offcanvas-padding-horizontal;
+    @include hook-nav-offcanvas();
+}
+
+/*
+ * Hover
+ * No hover on touch devices because it behaves buggy in fixed offcanvas
+ * 1. Apply hover style also to focus state
+ * 2. Remove default focus style
+ */
+
+.i-nav-offcanvas > .i-open > a,
+html:not(.i-touch) .i-nav-offcanvas > li > a:hover,
+html:not(.i-touch) .i-nav-offcanvas > li > a:focus { // 1
+    background: $nav-offcanvas-hover-background;
+    color: $nav-offcanvas-hover-color;
+    /* 2 */
+    outline: none;
+    @include hook-nav-offcanvas-hover();
+}
+
+/*
+ * Active
+ * `html .i-nav` needed for higher specificity to override hover
+ */
+html .i-nav.i-nav-offcanvas > li.i-active > a {
+    background: $nav-offcanvas-active-background;
+    color: $nav-offcanvas-active-color;
+    @include hook-nav-offcanvas-active();
+}
+
+/*
+ * Sub-object: `i-nav-header`
+ */
+
+.i-nav-offcanvas .i-nav-header {
+    color: $nav-offcanvas-header-color;
+    @include hook-nav-offcanvas-header();
+}
+
+/*
+ * Sub-object: `i-nav-divider`
+ */
+
+.i-nav-offcanvas .i-nav-divider {
+    border-top: $nav-offcanvas-divider-border-width solid $nav-offcanvas-divider-border;
+    @include hook-nav-offcanvas-divider();
+}
+
+/*
+ * Nested items
+ * No hover on touch devices because it behaves buggy in fixed offcanvas
+ */
+
+.i-nav-offcanvas ul a { color: $nav-offcanvas-nested-color; }
+html:not(.i-touch) .i-nav-offcanvas ul a:hover { color: $nav-offcanvas-nested-hover-color; }
+
+
+// Hooks
+// ========================================================================
+
+@include hook-nav-misc();
+
+// @mixin hook-nav-header(){}
+// @mixin hook-nav-divider(){}
+// @mixin hook-nav-sub(){}
+// @mixin hook-nav-parent-icon(){}
+
+// @mixin hook-nav-side(){}
+// @mixin hook-nav-side-hover(){}
+// @mixin hook-nav-side-active(){}
+// @mixin hook-nav-side-header(){}
+// @mixin hook-nav-side-divider(){}
+
+// @mixin hook-nav-dropdown(){}
+// @mixin hook-nav-dropdown-hover(){}
+// @mixin hook-nav-dropdown-header(){}
+// @mixin hook-nav-dropdown-divider(){}
+
+// @mixin hook-nav-navbar(){}
+// @mixin hook-nav-navbar-hover(){}
+// @mixin hook-nav-navbar-header(){}
+// @mixin hook-nav-navbar-divider(){}
+
+// @mixin hook-nav-offcanvas(){}
+// @mixin hook-nav-offcanvas-hover(){}
+// @mixin hook-nav-offcanvas-active(){}
+// @mixin hook-nav-offcanvas-header(){}
+// @mixin hook-nav-offcanvas-divider(){}
+
+// @mixin hook-nav-misc(){}

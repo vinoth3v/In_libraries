@@ -1,0 +1,599 @@
+// Name:            Animation
+// Description:     Provides a useful set of keyframe animations
+//
+// Component:       `i-animation-*`
+//
+// Modifiers:       `i-animation-fade`
+//                  `i-animation-scale-up`
+//                  `i-animation-scale-down`
+//                  `i-animation-slide-top`
+//                  `i-animation-slide-bottom`
+//                  `i-animation-slide-left`
+//                  `i-animation-slide-right`
+//                  `i-animation-scale`
+//                  `i-animation-shake`
+//                  `i-animation-reverse`
+//                  `i-animation-15`
+//                  `i-animation-top-left`
+//                  `i-animation-top-center`
+//                  `i-animation-top-right`
+//                  `i-animation-middle-left`
+//                  `i-animation-middle-right`
+//                  `i-animation-bottom-left`
+//                  `i-animation-bottom-center`
+//                  `i-animation-bottom-right`
+//
+// Sub-objects:     `i-animation-hover`
+//
+// Uses:            Scrollspy
+//
+// Used by:         Dropdown
+//                  Icon
+//                  Search
+//                  Datepicker
+//                  Slideshow
+//
+// ========================================================================
+
+
+/* ========================================================================
+   Component: Animation
+ ========================================================================== */
+
+[class*='i-animation-'] {
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+/* Hide animated element if scrollspy is used */
+@media screen {
+
+    [data-i-scrollspy*='i-animation-']:not([data-i-scrollspy*='target']) { opacity: 0; }
+
+}
+
+/*
+ * Fade
+ * Higher specificity (!important) needed because of reverse modifier
+ */
+
+.i-animation-fade {
+    -webkit-animation-name: i-fade;
+    animation-name: i-fade;
+    -webkit-animation-duration: 0.8s;
+    animation-duration: 0.8s;
+    -webkit-animation-timing-function: linear !important;
+    animation-timing-function: linear !important;
+}
+
+/*
+ * Fade with scale
+ */
+
+.i-animation-scale-up {
+    -webkit-animation-name: i-fade-scale-02;
+    animation-name: i-fade-scale-02;
+}
+
+.i-animation-scale-down {
+    -webkit-animation-name: i-fade-scale-18;
+    animation-name: i-fade-scale-18;
+}
+
+/*
+ * Fade with slide
+ */
+
+.i-animation-slide-top {
+    -webkit-animation-name: i-fade-top;
+    animation-name: i-fade-top;
+}
+
+.i-animation-slide-bottom {
+    -webkit-animation-name: i-fade-bottom;
+    animation-name: i-fade-bottom;
+}
+
+.i-animation-slide-left {
+    -webkit-animation-name: i-fade-left;
+    animation-name: i-fade-left;
+}
+
+.i-animation-slide-right {
+    -webkit-animation-name: i-fade-right;
+    animation-name: i-fade-right;
+}
+
+/*
+ * Scale
+ */
+
+.i-animation-scale {
+    -webkit-animation-name: i-scale-12;
+    animation-name: i-scale-12;
+}
+
+/*
+ * Shake
+ */
+
+.i-animation-shake {
+    -webkit-animation-name: i-shake;
+    animation-name: i-shake;
+}
+
+
+/* Direction modifiers
+ ========================================================================== */
+
+.i-animation-reverse {
+    -webkit-animation-direction: reverse;
+    animation-direction: reverse;
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+}
+
+
+/* Duration modifiers
+========================================================================== */
+
+.i-animation-15 {
+    -webkit-animation-duration: 15s;
+    animation-duration: 15s;
+}
+
+
+/* Origin modifiers
+========================================================================== */
+
+.i-animation-top-left {
+     -webkit-transform-origin: 0 0;
+     transform-origin: 0 0;
+}
+
+.i-animation-top-center {
+     -webkit-transform-origin: 50% 0;
+     transform-origin: 50% 0;
+}
+
+.i-animation-top-right {
+     -webkit-transform-origin: 100% 0;
+     transform-origin: 100% 0;
+}
+
+.i-animation-middle-left {
+     -webkit-transform-origin: 0 50%;
+     transform-origin: 0 50%;
+}
+
+.i-animation-middle-right {
+     -webkit-transform-origin: 100% 50%;
+     transform-origin: 100% 50%;
+}
+
+.i-animation-bottom-left {
+     -webkit-transform-origin: 0 100%;
+     transform-origin: 0 100%;
+}
+
+.i-animation-bottom-center {
+     -webkit-transform-origin: 50% 100%;
+     transform-origin: 50% 100%;
+}
+
+.i-animation-bottom-right {
+     -webkit-transform-origin: 100% 100%;
+     transform-origin: 100% 100%;
+}
+
+
+/* Sub-object: `i-animation-hover`
+========================================================================== */
+
+/*
+ * Enable animation only on hover
+ * Note: Firefox also needs this because animations are not triggered when switching between display `hidden` and `block`
+ */
+
+.i-animation-hover:not(:hover),
+.i-animation-hover:not(:hover) [class*='i-animation-'],
+.i-touch .i-animation-hover:not(.i-hover),
+.i-touch .i-animation-hover:not(.i-hover) [class*='i-animation-'] {
+    -webkit-animation-name: none;
+    animation-name: none;
+}
+
+
+/* Keyframes: Fade
+ * Used by dropdown, datepicker and slideshow component
+ ========================================================================== */
+
+@-webkit-keyframes i-fade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes i-fade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
+/* Keyframes: Fade with slide
+ ========================================================================== */
+
+/*
+ * Top
+ */
+
+@-webkit-keyframes i-fade-top {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes i-fade-top {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*
+ * Bottom
+ */
+
+@-webkit-keyframes i-fade-bottom {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes i-fade-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*
+ * Left
+ */
+
+@-webkit-keyframes i-fade-left {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+}
+
+@keyframes i-fade-left {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/*
+ * Right
+ */
+
+@-webkit-keyframes i-fade-right {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+}
+
+@keyframes i-fade-right {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* Keyframes: Fade with scale
+ ========================================================================== */
+
+/*
+ * Scale by 0.2
+ */
+
+@-webkit-keyframes i-fade-scale-02 {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0.2);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes i-fade-scale-02 {
+    0% {
+        opacity: 0;
+        transform: scale(0.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/*
+ * Scale by 1.5
+ * Used by slideshow component
+ */
+
+@-webkit-keyframes i-fade-scale-15 {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(1.5);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes i-fade-scale-15 {
+    0% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/*
+ * Scale by 1.8
+ */
+
+@-webkit-keyframes i-fade-scale-18 {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(1.8);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes i-fade-scale-18 {
+    0% {
+        opacity: 0;
+        transform: scale(1.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Keyframes: Slide
+ * Used by slideshow component
+ ========================================================================== */
+
+/*
+ * Left
+ */
+
+@-webkit-keyframes i-slide-left {
+    0% { -webkit-transform: translateX(-100%); }
+    100% { -webkit-transform: translateX(0); }
+}
+
+@keyframes i-slide-left {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+}
+
+/*
+ * Right
+ */
+
+@-webkit-keyframes i-slide-right {
+    0% { -webkit-transform: translateX(100%); }
+    100% { -webkit-transform: translateX(0); }
+}
+
+@keyframes i-slide-right {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+}
+
+/*
+ * Left third
+ */
+
+@-webkit-keyframes i-slide-left-33 {
+    0% { -webkit-transform: translateX(33%); }
+    100% { -webkit-transform: translateX(0); }
+}
+
+@keyframes i-slide-left-33 {
+    0% { transform: translateX(33%); }
+    100% { transform: translateX(0); }
+}
+
+/*
+ * Right third
+ */
+
+@-webkit-keyframes i-slide-right-33 {
+    0% { -webkit-transform: translateX(-33%); }
+    100% { -webkit-transform: translateX(0); }
+}
+
+@keyframes i-slide-right-33 {
+    0% { transform: translateX(-33%); }
+    100% { transform: translateX(0); }
+}
+
+
+/* Keyframes: Scale
+ ========================================================================== */
+
+@-webkit-keyframes i-scale-12 {
+    0% { -webkit-transform: scale(1.2); }
+    100% { -webkit-transform: scale(1); }
+}
+
+@keyframes i-scale-12 {
+    0% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+
+/* Keyframes: Rotate
+ * Used by icon component
+ ========================================================================== */
+
+@-webkit-keyframes i-rotate {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(359deg); }
+}
+
+@keyframes i-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(359deg); }
+}
+
+
+/* Keyframes: Shake
+ ========================================================================== */
+
+@-webkit-keyframes i-shake {
+    0%, 100% { -webkit-transform: translateX(0); }
+    10% { -webkit-transform: translateX(-9px); }
+    20% { -webkit-transform: translateX(8px); }
+    30% { -webkit-transform: translateX(-7px); }
+    40% { -webkit-transform: translateX(6px); }
+    50% { -webkit-transform: translateX(-5px); }
+    60% { -webkit-transform: translateX(4px); }
+    70% { -webkit-transform: translateX(-3px); }
+    80% { -webkit-transform: translateX(2px); }
+    90% { -webkit-transform: translateX(-1px); }
+}
+
+@keyframes i-shake {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-9px); }
+    20% { transform: translateX(8px); }
+    30% { transform: translateX(-7px); }
+    40% { transform: translateX(6px); }
+    50% { transform: translateX(-5px); }
+    60% { transform: translateX(4px); }
+    70% { transform: translateX(-3px); }
+    80% { transform: translateX(2px); }
+    90% { transform: translateX(-1px); }
+}
+
+
+/* Keyframes: Fade with slide fixed
+ * Used by dropdown and search component
+ ========================================================================== */
+
+/*
+ * Top fixed
+ */
+
+@-webkit-keyframes i-slide-top-fixed {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes i-slide-top-fixed {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*
+ * Bottom fixed
+ */
+
+@-webkit-keyframes i-slide-bottom-fixed {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes i-slide-bottom-fixed {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+// Hooks
+// ========================================================================
+
+@include hook-animation-misc();
+
+// @mixin hook-animation-misc(){}

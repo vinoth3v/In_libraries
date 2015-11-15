@@ -1,0 +1,229 @@
+// Name:            Nestable
+// Description:     Defines styles for nestable lists
+//
+// Component:       `i-nestable`
+//
+// Sub-objects:     `i-nestable-list`
+//                  `i-nestable-item`
+//                  `i-nestable-handle`
+//                  `i-nestable-moving`
+//                  `i-nestable-toggle`
+//                  `i-nestable-panel`
+//
+// Modifier:        `i-nestable-dragged`
+//                  `i-nestable-placeholder`
+//
+// States:          `i-parent`
+//                  `i-collapsed`
+//
+// Markup:
+//
+// <!-- i-nestable -->
+// <ul class="i-nestable" data-i-nestable>
+//     <li></li>
+//     <li></li>
+// </ul>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@nestable-padding-left:                         40px;
+
+@nestable-item-margin:                          10px;
+
+@nestable-dragged-z-index:                      1050;
+
+@nestable-placeholder-border:                   #ddd;
+
+@nestable-empty-height:                         30px;
+
+@nestable-toggle-icon:                          "\f147";
+@nestable-toggle-collapsed-icon:                "\f196";
+
+@nestable-panel-padding:                        5px;
+@nestable-panel-background:                     #f5f5f5;
+
+
+/* ========================================================================
+   Component: Nestable
+ ========================================================================== */
+
+.i-nestable {
+    padding: 0;
+    list-style: none;
+    .hook-nestable;
+}
+
+/*
+ * Disables the default callout shown when you touch and hold a touch target
+ * Currently only works in Webkit
+ */
+
+.i-nestable a,
+.i-nestable img { -webkit-touch-callout: none; }
+
+
+/* Sub-object `i-nestable-list`
+ ========================================================================== */
+
+.i-nestable-list {
+    margin: 0;
+    padding-left: @nestable-padding-left;
+    list-style: none;
+}
+
+
+/* Sub-modifier `i-nestable-item`
+ ========================================================================== */
+
+/*
+ * 1. Deactivate browser touch actions in IE11
+ */
+
+.i-nestable-item {
+    /* 1 */
+    touch-action: none;
+    .hook-nestable-item;
+}
+
+.i-nestable-item + .i-nestable-item { margin-top: @nestable-item-margin; }
+
+.i-nestable-list:not(.i-nestable-dragged) > .i-nestable-item:first-child { margin-top: @nestable-item-margin; }
+
+
+/* Sub-modifier `i-nestable-dragged`
+ ========================================================================== */
+
+/*
+ * 1. Reset style
+ */
+
+.i-nestable-dragged {
+    position: absolute;
+    z-index: @nestable-dragged-z-index;
+    pointer-events: none;
+    /* 1 */
+    padding-left: 0;
+    .hook-nestable-dragged;
+}
+
+
+/* Sub-modifier `i-nestable-placeholder`
+ ========================================================================== */
+
+.i-nestable-placeholder { position: relative; }
+
+.i-nestable-placeholder > * { opacity: 0; }
+
+.i-nestable-placeholder:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 1px dashed @nestable-placeholder-border;
+    opacity: 1;
+    .hook-nestable-placeholder;
+}
+
+
+/* Empty List
+ ========================================================================== */
+
+.i-nestable-empty {
+    min-height: @nestable-empty-height;
+    .hook-nestable-empty;
+}
+
+
+/* Sub-object `i-nestable-handle`
+ ========================================================================== */
+
+/*
+ * Deactivate browser touch actions in IE11
+ */
+
+.i-nestable-handle { touch-action: none; }
+
+/* Hover */
+.i-nestable-handle:hover { cursor: move; }
+
+
+/* Sub-object `i-nestable-moving`
+ ========================================================================== */
+
+.i-nestable-moving,
+/* Needed if moving over links or buttons */
+.i-nestable-moving * { cursor: move; }
+
+
+/* [data-nestable-action='toggle']
+ ========================================================================== */
+
+/*
+ * 1. Makes text unselectable. Happens if double clicked by mistake
+ */
+
+[data-nestable-action='toggle'] {
+    cursor: pointer;
+    /* 1 */
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/* Sub-object `.i-nestable-toggle`
+ ========================================================================== */
+
+.i-nestable-toggle {
+    display: inline-block;
+    visibility: hidden;
+    .hook-nestable-toggle;
+}
+
+.i-nestable-toggle:after {
+    content: @nestable-toggle-icon;
+    font-family: FontAwesome;
+}
+
+.i-parent > :not(.i-nestable-list) .i-nestable-toggle { visibility: visible; }
+
+/*
+ * Collapsed
+ */
+
+.i-collapsed .i-nestable-list { display: none; }
+
+.i-collapsed .i-nestable-toggle:after { content: @nestable-toggle-collapsed-icon; }
+
+
+/* Sub-object `i-nestable-panel`
+ ========================================================================== */
+
+.i-nestable-panel {
+    padding: @nestable-panel-padding;
+    background: @nestable-panel-background;
+    .hook-nestable-panel;
+}
+
+
+// Hooks
+// ========================================================================
+
+.hook-nestable-misc;
+
+.hook-nestable() {}
+.hook-nestable-item() {}
+.hook-nestable-dragged() {}
+.hook-nestable-placeholder() {}
+.hook-nestable-empty() {}
+.hook-nestable-handle() {}
+.hook-nestable-toggle() {}
+.hook-nestable-panel() {}
+.hook-nestable-misc() {}
